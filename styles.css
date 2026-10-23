@@ -106,7 +106,11 @@ h1, h2, h3, p { margin-top: 0; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag-list span { border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; color: #aaa8a1; font: 10px var(--mono); }
 .client-name { margin: 24px 0 10px; display: flex; align-items: center; gap: 10px; color: var(--accent); font: 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-.client-name img { width: auto; max-width: 82px; height: 24px; object-fit: contain; }
+.client-name > img { width: auto; max-width: 82px; height: 24px; object-fit: contain; }
+.company-mark { height: 26px; flex: 0 0 auto; overflow: hidden; display: inline-flex; align-items: center; }
+.company-mark img { width: auto; max-width: none; height: 26px; object-fit: unset; }
+.company-mark-shiprocket { width: 20px; }
+.company-mark-leegality { width: 25px; }
 .project-info h3 { max-width: 620px; margin-bottom: 13px; font: 400 clamp(24px, 2.6vw, 36px)/1.15 var(--serif); letter-spacing: -.025em; }
 .project-info > p:not(.client-name) { max-width: 620px; margin-bottom: 19px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; }
