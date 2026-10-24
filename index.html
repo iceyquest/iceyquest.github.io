@@ -66,47 +66,47 @@
 
         <div class="project-grid">
           <article class="project-card">
-            <a class="project-visual visual-tracking" href="https://www.behance.net/gallery/257302951/MyShiprocket-Track-and-Discover" target="_blank" rel="noreferrer" aria-label="View the Shiprocket case study on Behance">
+            <button class="project-visual visual-tracking" type="button" data-case-study-url="https://www.behance.net/gallery/257302951/MyShiprocket-Track-and-Discover" aria-label="Open the Shiprocket case study preview">
               <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Customer browsing a product on a mobile phone">
               <span class="project-result">+34% activation</span><span class="project-year">2024</span>
               <span class="visual-caption">A better post-purchase experience <b>↗</b></span>
-            </a>
+            </button>
             <div class="project-info">
               <div class="tag-list"><span>UX Research</span><span>Interaction Design</span><span>A/B Testing</span></div>
               <p class="client-name"><span class="company-mark company-mark-shiprocket"><img src="assets/shiprocket.svg" alt=""></span>Shiprocket</p>
               <h3>The Biggest Opportunity in Our Order Tracking App Had Nothing to Do with Tracking Orders</h3>
               <p>How questioning the original product brief led me to redesign an order-tracking app into a post-purchase commerce experience.</p>
-              <a class="text-link" href="https://www.behance.net/gallery/257302951/MyShiprocket-Track-and-Discover" target="_blank" rel="noreferrer">Read case study <span aria-hidden="true">→</span></a>
+              <button class="text-link" type="button" data-case-study-url="https://www.behance.net/gallery/257302951/MyShiprocket-Track-and-Discover">Read case study <span aria-hidden="true">→</span></button>
             </div>
           </article>
 
           <article class="project-card">
-            <a class="project-visual visual-system" href="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation" target="_blank" rel="noreferrer" aria-label="View the Smart Query Resolution case study on Behance">
+            <button class="project-visual visual-system" type="button" data-case-study-url="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation" aria-label="Open the PocketFM case study preview">
               <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Colorful design materials and creative stationery">
               <span class="project-result">3× faster delivery</span><span class="project-year">2023</span>
               <span class="visual-caption">One system. Every surface. <b>↗</b></span>
-            </a>
+            </button>
             <div class="project-info">
               <div class="tag-list"><span>Design Systems</span><span>Component Library</span><span>Documentation</span></div>
               <p class="client-name"><img src="assets/pocketfm.png" alt="">POCKETFM</p>
               <h3>Smart Query Resolution: Workflow Automation</h3>
               <p>Built a multi-brand token-based design system adopted by 4 product teams, cutting design-to-dev handoff time and eliminating visual inconsistency across 12 surfaces.</p>
-              <a class="text-link" href="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation" target="_blank" rel="noreferrer">Read case study <span aria-hidden="true">→</span></a>
+              <button class="text-link" type="button" data-case-study-url="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation">Read case study <span aria-hidden="true">→</span></button>
             </div>
           </article>
 
           <article class="project-card">
-            <a class="project-visual visual-field" href="https://www.behance.net/gallery/257304147/Leegality-Enterprise-Walkthrough" target="_blank" rel="noreferrer" aria-label="View the Leegality Enterprise Walkthrough on Behance">
+            <button class="project-visual visual-field" type="button" data-case-study-url="https://www.behance.net/gallery/257304147/Leegality-Enterprise-Walkthrough" aria-label="Open the Leegality case study preview">
               <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Documents and paperwork on a desk">
               <span class="project-result">Enterprise UX</span><span class="project-year">2023</span>
               <span class="visual-caption">Documentation Made Smarter <b>↗</b></span>
-            </a>
+            </button>
             <div class="project-info">
               <div class="tag-list"><span>Enterprise UX</span><span>Product Design</span><span>Walkthrough</span></div>
               <p class="client-name"><span class="company-mark company-mark-leegality"><img src="assets/leegality.svg" alt=""></span>Leegality</p>
               <h3>Leegality Enterprise Walkthrough</h3>
               <p>An enterprise product walkthrough designed to make complex document workflows easier to understand and navigate.</p>
-              <a class="text-link" href="https://www.behance.net/gallery/257304147/Leegality-Enterprise-Walkthrough" target="_blank" rel="noreferrer">Read case study <span aria-hidden="true">→</span></a>
+              <button class="text-link" type="button" data-case-study-url="https://www.behance.net/gallery/257304147/Leegality-Enterprise-Walkthrough">Read case study <span aria-hidden="true">→</span></button>
             </div>
           </article>
         </div>
@@ -206,5 +206,58 @@
       <span>© 2026 — All rights reserved</span>
       <a class="back-top" href="#top">Back to top ↑</a>
     </footer>
+
+    <dialog class="case-study-dialog" aria-labelledby="case-study-title">
+      <div class="case-study-header">
+        <div>
+          <p class="section-label"><span>Selected Work</span></p>
+          <h2 id="case-study-title"></h2>
+        </div>
+        <button class="case-study-close" type="button" aria-label="Close case study preview">×</button>
+      </div>
+      <p class="case-study-note">
+        If the Behance preview is unavailable, you can
+        <a class="case-study-external" href="#" target="_blank" rel="noreferrer">open this case study on Behance <span aria-hidden="true">↗</span></a>.
+      </p>
+      <iframe class="case-study-frame" title="Behance case study preview" loading="lazy" allowfullscreen></iframe>
+    </dialog>
+
+    <script>
+      const caseStudyDialog = document.querySelector(".case-study-dialog");
+      const caseStudyFrame = document.querySelector(".case-study-frame");
+      const caseStudyTitle = document.querySelector("#case-study-title");
+      const caseStudyExternal = document.querySelector(".case-study-external");
+
+      document.querySelectorAll("[data-case-study-url]").forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+          const project = trigger.closest(".project-card");
+          const url = trigger.dataset.caseStudyUrl;
+          caseStudyTitle.textContent = project.querySelector(".project-info h3").textContent;
+          caseStudyExternal.href = url;
+          caseStudyFrame.src = url;
+          caseStudyDialog.showModal();
+        });
+      });
+
+      document.querySelector(".case-study-close").addEventListener("click", () => {
+        caseStudyDialog.close();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && caseStudyDialog.open) {
+          caseStudyDialog.close();
+        }
+      });
+
+      caseStudyDialog.addEventListener("click", (event) => {
+        if (event.target === caseStudyDialog) {
+          caseStudyDialog.close();
+        }
+      });
+
+      caseStudyDialog.addEventListener("close", () => {
+        caseStudyFrame.removeAttribute("src");
+      });
+    </script>
   </body>
 </html>

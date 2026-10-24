@@ -92,6 +92,7 @@ h1, h2, h3, p { margin-top: 0; }
 .project-card { min-width: 0; }
 .project-visual {
   position: relative; height: clamp(260px, 34vw, 500px); display: block; overflow: hidden;
+  width: 100%; padding: 0; border: 0; color: inherit; text-align: left; cursor: pointer;
   background: #191916;
 }
 .project-visual::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, rgba(0,0,0,.1), transparent 36%, rgba(0,0,0,.35)); pointer-events: none; }
@@ -114,10 +115,26 @@ h1, h2, h3, p { margin-top: 0; }
 .project-info h3 { max-width: 620px; margin-bottom: 13px; font: 400 clamp(24px, 2.6vw, 36px)/1.15 var(--serif); letter-spacing: -.025em; }
 .project-info > p:not(.client-name) { max-width: 620px; margin-bottom: 19px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; }
+.project-info .text-link { padding: 0; border: 0; background: none; color: inherit; font-family: inherit; cursor: pointer; }
 .text-link span { color: var(--accent); transition: transform .2s; }
 .text-link:hover span { transform: translateX(4px); }
 .more-link { min-height: 60px; width: fit-content; margin: 76px auto 0; padding: 0 24px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); color: #c4c2bb; font-size: 12px; transition: .2s; }
 .more-link:hover { border-color: var(--accent); color: var(--accent); }
+
+.case-study-dialog {
+  width: min(1100px, calc(100% - 32px)); max-width: none; max-height: min(92dvh, 1000px);
+  padding: clamp(20px, 4vw, 42px); overflow: auto; border: 1px solid var(--line);
+  background: #111110; color: var(--ink);
+}
+.case-study-dialog::backdrop { background: rgba(0, 0, 0, .82); backdrop-filter: blur(5px); }
+.case-study-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.case-study-header .section-label { margin-bottom: 12px; }
+.case-study-header h2 { margin: 0; font: 400 clamp(28px, 4vw, 46px)/1.12 var(--serif); letter-spacing: -.035em; }
+.case-study-close { width: 42px; height: 42px; flex: 0 0 auto; border: 1px solid var(--line); background: transparent; color: var(--ink); font: 28px/1 var(--sans); cursor: pointer; }
+.case-study-close:hover { border-color: var(--accent); color: var(--accent); }
+.case-study-note { margin: 18px 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.case-study-external { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.case-study-frame { display: block; width: 100%; height: min(65dvh, 680px); border: 1px solid var(--line); background: #0b0b0a; }
 
 .section-process { background: linear-gradient(90deg, rgba(255,255,255,.018), transparent 75%); }
 .process-list { max-width: 1040px; margin-left: auto; border-top: 1px solid var(--line); }
@@ -234,6 +251,8 @@ blockquote cite { color: var(--muted); font: 10px var(--mono); letter-spacing: .
   .project-info h3 { font-size: 28px; }
   .project-info > p:not(.client-name) { font-size: 13px; }
   .more-link { margin-top: 48px; font-size: 11px; }
+  .case-study-dialog { width: calc(100% - 20px); max-height: 94dvh; padding: 18px; }
+  .case-study-frame { height: 65dvh; }
   .process-step summary { min-height: 74px; grid-template-columns: 40px 1fr 20px; gap: 12px; }
   .step-title { font-size: 25px; }
   .step-content { padding: 0 8px 25px 52px; font-size: 13px; }
