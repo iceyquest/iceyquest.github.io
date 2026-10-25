@@ -80,7 +80,7 @@
             </div>
           </article>
 
-          <article class="project-card" data-case-study-image="assets/pocketfm-case-study.jpg">
+          <article class="project-card">
             <button class="project-visual visual-system" type="button" data-case-study-url="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation" aria-label="Open the PocketFM case study preview">
               <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Colorful design materials and creative stationery">
               <span class="project-result">3× faster delivery</span><span class="project-year">2023</span>
@@ -210,46 +210,64 @@
     <dialog class="case-study-dialog" aria-labelledby="case-study-title">
       <div class="case-study-header">
         <div>
-          <p class="section-label"><span>Selected Work</span></p>
+          <p class="section-label"><span>Case Study Preview</span></p>
           <h2 id="case-study-title"></h2>
         </div>
         <button class="case-study-close" type="button" aria-label="Close case study preview">×</button>
       </div>
-      <p class="case-study-note">
-        If the Behance preview is unavailable, you can
-        <a class="case-study-external" href="#" target="_blank" rel="noreferrer">open this case study on Behance <span aria-hidden="true">↗</span></a>.
-      </p>
-      <img class="case-study-image" alt="" hidden>
-      <iframe class="case-study-frame" title="Behance case study preview" loading="lazy" allowfullscreen></iframe>
+      <div class="case-study-preview">
+        <div class="case-study-byline">
+          <div class="case-study-client"></div>
+          <div class="case-study-metrics">
+            <span class="case-study-result"></span>
+            <span class="case-study-year"></span>
+          </div>
+        </div>
+        <p class="case-study-summary"></p>
+        <div class="tag-list case-study-tags"></div>
+        <a class="button button-primary case-study-external" href="#" target="_blank" rel="noreferrer">
+          View full case study on Behance <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </dialog>
 
     <script>
       const caseStudyDialog = document.querySelector(".case-study-dialog");
-      const caseStudyFrame = document.querySelector(".case-study-frame");
-      const caseStudyImage = document.querySelector(".case-study-image");
-      const caseStudyNote = document.querySelector(".case-study-note");
       const caseStudyTitle = document.querySelector("#case-study-title");
       const caseStudyExternal = document.querySelector(".case-study-external");
+      const caseStudyClient = document.querySelector(".case-study-client");
+      const caseStudyResult = document.querySelector(".case-study-result");
+      const caseStudyYear = document.querySelector(".case-study-year");
+      const caseStudySummary = document.querySelector(".case-study-summary");
+      const caseStudyTags = document.querySelector(".case-study-tags");
 
       document.querySelectorAll("[data-case-study-url]").forEach((trigger) => {
         trigger.addEventListener("click", () => {
           const project = trigger.closest(".project-card");
           const url = trigger.dataset.caseStudyUrl;
-          const image = project.dataset.caseStudyImage;
-          caseStudyTitle.textContent = project.querySelector(".project-info h3").textContent;
-          caseStudyExternal.href = url;
-          caseStudyImage.hidden = !image;
-          caseStudyFrame.hidden = Boolean(image);
-          if (image) {
-            caseStudyImage.src = image;
-            caseStudyImage.alt = `${caseStudyTitle.textContent} case study`;
-            caseStudyNote.firstChild.textContent = "Full case study shown below. You can also ";
-          } else {
-            caseStudyImage.removeAttribute("src");
-            caseStudyImage.alt = "";
-            caseStudyNote.firstChild.textContent = "If the Behance preview is unavailable, you can ";
-            caseStudyFrame.src = url;
+          const projectInfo = project.querySelector(".project-info");
+          const projectClient = projectInfo.querySelector(".client-name");
+          const companyLogo = projectClient.querySelector("img");
+          const companyMark = companyLogo?.closest(".company-mark");
+          const projectVisual = project.querySelector(".project-visual");
+          caseStudyTitle.textContent = projectInfo.querySelector("h3").textContent;
+          caseStudyClient.replaceChildren();
+          if (companyLogo) {
+            caseStudyClient.append((companyMark || companyLogo).cloneNode(true));
           }
+          const companyName = document.createElement("span");
+          companyName.textContent = projectClient.textContent.trim();
+          caseStudyClient.append(companyName);
+          caseStudyResult.textContent = projectVisual.querySelector(".project-result").textContent;
+          caseStudyYear.textContent = projectVisual.querySelector(".project-year").textContent;
+          caseStudySummary.textContent = projectInfo.querySelector(":scope > p:not(.client-name)").textContent;
+          caseStudyTags.replaceChildren();
+          projectInfo.querySelectorAll(".tag-list span").forEach((tag) => {
+            const previewTag = document.createElement("span");
+            previewTag.textContent = tag.textContent;
+            caseStudyTags.append(previewTag);
+          });
+          caseStudyExternal.href = url;
           caseStudyDialog.showModal();
         });
       });
@@ -270,10 +288,6 @@
         }
       });
 
-      caseStudyDialog.addEventListener("close", () => {
-        caseStudyFrame.removeAttribute("src");
-        caseStudyImage.removeAttribute("src");
-      });
     </script>
   </body>
 </html>
