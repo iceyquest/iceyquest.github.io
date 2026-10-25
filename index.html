@@ -65,7 +65,7 @@
         </div>
 
         <div class="project-grid">
-          <article class="project-card">
+          <article class="project-card" data-case-study-summary="How questioning the original product brief led me to redesign an order-tracking app into a post-purchase commerce experience.">
             <button class="project-visual visual-tracking" type="button" data-case-study-url="https://www.behance.net/gallery/257302951/MyShiprocket-Track-and-Discover" aria-label="Open the Shiprocket case study preview">
               <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Customer browsing a product on a mobile phone">
               <span class="project-result">+34% activation</span><span class="project-year">2024</span>
@@ -75,12 +75,11 @@
               <div class="tag-list"><span>UX Research</span><span>Interaction Design</span><span>A/B Testing</span></div>
               <p class="client-name"><span class="company-mark company-mark-shiprocket"><img src="assets/shiprocket.svg" alt=""></span>Shiprocket</p>
               <h3>The Biggest Opportunity in Our Order Tracking App Had Nothing to Do with Tracking Orders</h3>
-              <p>How questioning the original product brief led me to redesign an order-tracking app into a post-purchase commerce experience.</p>
               <button class="text-link" type="button" data-case-study-url="https://www.behance.net/gallery/257302951/MyShiprocket-Track-and-Discover">Read case study <span aria-hidden="true">→</span></button>
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-case-study-summary="Built a multi-brand token-based design system adopted by 4 product teams, cutting design-to-dev handoff time and eliminating visual inconsistency across 12 surfaces.">
             <button class="project-visual visual-system" type="button" data-case-study-url="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation" aria-label="Open the PocketFM case study preview">
               <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Colorful design materials and creative stationery">
               <span class="project-result">3× faster delivery</span><span class="project-year">2023</span>
@@ -90,12 +89,11 @@
               <div class="tag-list"><span>Design Systems</span><span>Component Library</span><span>Documentation</span></div>
               <p class="client-name"><img src="assets/pocketfm.png" alt="">POCKETFM</p>
               <h3>Smart Query Resolution: Workflow Automation</h3>
-              <p>Built a multi-brand token-based design system adopted by 4 product teams, cutting design-to-dev handoff time and eliminating visual inconsistency across 12 surfaces.</p>
               <button class="text-link" type="button" data-case-study-url="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation">Read case study <span aria-hidden="true">→</span></button>
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-case-study-summary="An enterprise product walkthrough designed to make complex document workflows easier to understand and navigate.">
             <button class="project-visual visual-field" type="button" data-case-study-url="https://www.behance.net/gallery/257304147/Leegality-Enterprise-Walkthrough" aria-label="Open the Leegality case study preview">
               <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Documents and paperwork on a desk">
               <span class="project-result">Enterprise UX</span><span class="project-year">2023</span>
@@ -105,7 +103,6 @@
               <div class="tag-list"><span>Enterprise UX</span><span>Product Design</span><span>Walkthrough</span></div>
               <p class="client-name"><span class="company-mark company-mark-leegality"><img src="assets/leegality.svg" alt=""></span>Leegality</p>
               <h3>Leegality Enterprise Walkthrough</h3>
-              <p>An enterprise product walkthrough designed to make complex document workflows easier to understand and navigate.</p>
               <button class="text-link" type="button" data-case-study-url="https://www.behance.net/gallery/257304147/Leegality-Enterprise-Walkthrough">Read case study <span aria-hidden="true">→</span></button>
             </div>
           </article>
@@ -284,7 +281,7 @@
           caseStudyClient.append(companyName);
           caseStudyResult.textContent = projectVisual.querySelector(".project-result").textContent;
           caseStudyYear.textContent = projectVisual.querySelector(".project-year").textContent;
-          caseStudySummary.textContent = projectInfo.querySelector(":scope > p:not(.client-name)").textContent;
+          caseStudySummary.textContent = project.dataset.caseStudySummary;
           caseStudyTags.replaceChildren();
           projectInfo.querySelectorAll(".tag-list span").forEach((tag) => {
             const previewTag = document.createElement("span");
