@@ -135,6 +135,8 @@ h1, h2, h3, p { margin-top: 0; }
 .case-study-note { margin: 18px 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .case-study-external { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .case-study-frame { display: block; width: 100%; height: min(65dvh, 680px); border: 1px solid var(--line); background: #0b0b0a; }
+.case-study-image { display: block; width: min(100%, 768px); height: auto; margin: 0 auto; }
+.case-study-image[hidden], .case-study-frame[hidden] { display: none; }
 
 .section-process { background: linear-gradient(90deg, rgba(255,255,255,.018), transparent 75%); }
 .process-list { max-width: 1040px; margin-left: auto; border-top: 1px solid var(--line); }

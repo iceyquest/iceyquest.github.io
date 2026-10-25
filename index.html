@@ -80,7 +80,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-case-study-image="assets/pocketfm-case-study.jpg">
             <button class="project-visual visual-system" type="button" data-case-study-url="https://www.behance.net/gallery/257184135/Smart-Query-Resolution-Workflow-Automation" aria-label="Open the PocketFM case study preview">
               <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Colorful design materials and creative stationery">
               <span class="project-result">3× faster delivery</span><span class="project-year">2023</span>
@@ -219,12 +219,15 @@
         If the Behance preview is unavailable, you can
         <a class="case-study-external" href="#" target="_blank" rel="noreferrer">open this case study on Behance <span aria-hidden="true">↗</span></a>.
       </p>
+      <img class="case-study-image" alt="" hidden>
       <iframe class="case-study-frame" title="Behance case study preview" loading="lazy" allowfullscreen></iframe>
     </dialog>
 
     <script>
       const caseStudyDialog = document.querySelector(".case-study-dialog");
       const caseStudyFrame = document.querySelector(".case-study-frame");
+      const caseStudyImage = document.querySelector(".case-study-image");
+      const caseStudyNote = document.querySelector(".case-study-note");
       const caseStudyTitle = document.querySelector("#case-study-title");
       const caseStudyExternal = document.querySelector(".case-study-external");
 
@@ -232,9 +235,21 @@
         trigger.addEventListener("click", () => {
           const project = trigger.closest(".project-card");
           const url = trigger.dataset.caseStudyUrl;
+          const image = project.dataset.caseStudyImage;
           caseStudyTitle.textContent = project.querySelector(".project-info h3").textContent;
           caseStudyExternal.href = url;
-          caseStudyFrame.src = url;
+          caseStudyImage.hidden = !image;
+          caseStudyFrame.hidden = Boolean(image);
+          if (image) {
+            caseStudyImage.src = image;
+            caseStudyImage.alt = `${caseStudyTitle.textContent} case study`;
+            caseStudyNote.firstChild.textContent = "Full case study shown below. You can also ";
+          } else {
+            caseStudyImage.removeAttribute("src");
+            caseStudyImage.alt = "";
+            caseStudyNote.firstChild.textContent = "If the Behance preview is unavailable, you can ";
+            caseStudyFrame.src = url;
+          }
           caseStudyDialog.showModal();
         });
       });
@@ -257,6 +272,7 @@
 
       caseStudyDialog.addEventListener("close", () => {
         caseStudyFrame.removeAttribute("src");
+        caseStudyImage.removeAttribute("src");
       });
     </script>
   </body>
