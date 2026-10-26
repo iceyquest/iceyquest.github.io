@@ -31,9 +31,12 @@
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
-      <a class="wordmark" href="#top" aria-label="Gaurav Sharma, home">
-        <span class="black-hole-mark" aria-hidden="true"><span></span></span>
-        Gaurav Sharma
+      <a class="wordmark" href="#top" aria-label="GS, home">
+        GS
+        <span class="black-hole-mark" aria-hidden="true">
+          <span class="black-hole-disk"></span>
+          <span class="black-hole-horizon"></span>
+        </span>
       </a>
       <nav class="desktop-nav" aria-label="Main navigation">
         <a href="#work">Work</a>
@@ -237,8 +240,11 @@
 
     <footer class="site-footer page-wrap">
       <a class="wordmark" href="#top">
-        <span class="black-hole-mark" aria-hidden="true"><span></span></span>
-        Gaurav Sharma
+        GS
+        <span class="black-hole-mark" aria-hidden="true">
+          <span class="black-hole-disk"></span>
+          <span class="black-hole-horizon"></span>
+        </span>
       </a>
       <span>© 2026 — All rights reserved</span>
       <a class="back-top" href="#top">Back to top ↑</a>
@@ -302,9 +308,9 @@
             distance: Math.sqrt(Math.random()),
             offset: (Math.random() - 0.5) * 0.9,
             depth: (Math.random() - 0.5) * 0.22,
-            dnaPosition: Math.random(),
+            dnaPosition: Math.floor(index / 2) / Math.ceil(particleCount / 2),
             dnaStrand: index % 2,
-            dnaRung: index % 5 === 0,
+            dnaRung: index % 40 === 0,
             size: Math.random() * 1.9 + 0.5,
             twinkle: Math.random() * Math.PI * 2,
             hue: Math.random()
@@ -319,45 +325,61 @@
         const drawBlackHole = (context, centerX, centerY, radius, rotation, opacity) => {
           context.save();
           context.translate(centerX, centerY);
-          context.rotate(-0.12);
+          context.rotate(-0.1);
           context.globalAlpha = opacity;
 
-          const halo = context.createRadialGradient(0, 0, radius * 0.35, 0, 0, radius * 2.8);
-          halo.addColorStop(0, "rgba(255,222,159,0.28)");
-          halo.addColorStop(0.24, "rgba(255,125,42,0.17)");
+          const halo = context.createRadialGradient(0, 0, radius * 0.25, 0, 0, radius * 3.2);
+          halo.addColorStop(0, "rgba(255,242,204,0.38)");
+          halo.addColorStop(0.16, "rgba(255,156,65,0.28)");
+          halo.addColorStop(0.4, "rgba(255,91,34,0.12)");
           halo.addColorStop(1, "rgba(255,75,20,0)");
           context.fillStyle = halo;
           context.beginPath();
-          context.arc(0, 0, radius * 2.8, 0, Math.PI * 2);
+          context.arc(0, 0, radius * 3.2, 0, Math.PI * 2);
           context.fill();
 
-          context.rotate(rotation * 0.18);
-          const accretion = context.createLinearGradient(-radius * 1.65, -radius * 0.5, radius * 1.65, radius * 0.5);
-          accretion.addColorStop(0, "rgba(123,69,255,0.25)");
-          accretion.addColorStop(0.2, "rgba(255,105,42,0.95)");
-          accretion.addColorStop(0.48, "rgba(255,238,185,1)");
-          accretion.addColorStop(0.68, "rgba(255,145,54,0.95)");
-          accretion.addColorStop(1, "rgba(180,82,255,0.35)");
-          context.strokeStyle = accretion;
-          context.lineWidth = radius * 0.22;
-          context.shadowColor = "rgba(255,142,66,0.9)";
-          context.shadowBlur = radius * 0.7;
+          context.rotate(rotation * 0.22);
+          const disk = context.createLinearGradient(-radius * 1.8, -radius * 0.38, radius * 1.8, radius * 0.38);
+          disk.addColorStop(0, "rgba(106,66,255,0.2)");
+          disk.addColorStop(0.14, "rgba(255,89,33,0.88)");
+          disk.addColorStop(0.33, "rgba(255,188,91,1)");
+          disk.addColorStop(0.47, "rgba(255,250,220,1)");
+          disk.addColorStop(0.64, "rgba(255,139,54,0.96)");
+          disk.addColorStop(0.83, "rgba(255,83,30,0.72)");
+          disk.addColorStop(1, "rgba(143,74,255,0.24)");
+          context.strokeStyle = disk;
+          context.lineWidth = radius * 0.3;
+          context.shadowColor = "rgba(255,145,63,0.96)";
+          context.shadowBlur = radius * 0.82;
           context.beginPath();
-          context.ellipse(0, 0, radius * 1.45, radius * 0.46, 0, 0, Math.PI * 2);
+          context.ellipse(0, 0, radius * 1.52, radius * 0.48, 0, 0, Math.PI * 2);
           context.stroke();
 
-          context.shadowBlur = radius * 0.25;
-          context.strokeStyle = "rgba(255,245,216,0.92)";
-          context.lineWidth = Math.max(0.7, radius * 0.035);
+          for (let streak = 0; streak < 9; streak += 1) {
+            const angle = rotation * (0.22 + streak * 0.012) + streak * Math.PI * 2 / 9;
+            const pointX = Math.cos(angle) * radius * 1.42;
+            const pointY = Math.sin(angle) * radius * 0.44;
+            const streakGradient = context.createRadialGradient(pointX, pointY, 0, pointX, pointY, radius * 0.32);
+            streakGradient.addColorStop(0, streak % 3 === 0 ? "rgba(255,255,231,0.98)" : "rgba(255,180,93,0.9)");
+            streakGradient.addColorStop(1, "rgba(255,114,41,0)");
+            context.fillStyle = streakGradient;
+            context.beginPath();
+            context.ellipse(pointX, pointY, radius * 0.34, radius * 0.09, angle, 0, Math.PI * 2);
+            context.fill();
+          }
+
+          context.shadowBlur = radius * 0.35;
+          context.strokeStyle = "rgba(255,250,229,0.98)";
+          context.lineWidth = Math.max(0.8, radius * 0.045);
           context.beginPath();
-          context.ellipse(0, 0, radius * 0.82, radius * 0.23, 0, Math.PI * 1.05, Math.PI * 1.95);
+          context.ellipse(0, 0, radius * 0.86, radius * 0.27, 0, Math.PI * 1.03, Math.PI * 1.97);
           context.stroke();
 
-          context.shadowBlur = radius * 0.45;
-          context.strokeStyle = "rgba(255,107,35,0.9)";
-          context.lineWidth = Math.max(0.8, radius * 0.055);
+          context.shadowBlur = radius * 0.55;
+          context.strokeStyle = "rgba(255,137,60,0.95)";
+          context.lineWidth = Math.max(1, radius * 0.075);
           context.beginPath();
-          context.ellipse(0, 0, radius * 1.24, radius * 0.39, 0, rotation, rotation + Math.PI * 1.12);
+          context.ellipse(0, 0, radius * 1.24, radius * 0.4, 0, rotation * 0.22, rotation * 0.22 + Math.PI * 1.04);
           context.stroke();
 
           const horizonRadius = radius * 0.43;
@@ -390,10 +412,12 @@
           const yawSin = Math.sin(sideYaw);
           const tiltCos = Math.cos(sideTilt);
           const tiltSin = Math.sin(sideTilt);
-          const dnaProgress = revealed ? 1 : smoothstep(0.61, 0.99, progress);
-          const dnaWidth = Math.min(canvasWidth * 0.34, 390);
-          const dnaHeight = canvasHeight * 1.28;
-          const dnaTurns = 3.35;
+          const dnaProgress = revealed ? 1 : smoothstep(0.35, 1, progress);
+          const dnaWidth = canvasWidth * 1.32;
+          const dnaRadius = Math.min(canvasHeight * 0.16, 112);
+          const dnaTurns = 2.6;
+          const dnaSpin = Math.max(0, elapsed - duration * 0.48) * 0.000035;
+          const dnaTilt = 0.13;
 
           cosmosContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -423,29 +447,27 @@
               const x = centerX + yawX * perspective;
               const y = centerY + projectedY * perspective;
               const strandDirection = particle.dnaStrand === 0 ? 1 : -1;
-              const dnaPosition = particle.dnaRung ? Math.round(particle.dnaPosition * 20) / 20 : particle.dnaPosition;
-              const dnaAngle = dnaPosition * Math.PI * 2 * dnaTurns + (strandDirection < 0 ? Math.PI : 0);
-              const dnaX = centerX + Math.sin(dnaAngle) * dnaWidth * 0.48;
-              const dnaY = (dnaPosition - 0.5) * dnaHeight + centerY;
+              const dnaAngle = particle.dnaPosition * Math.PI * 2 * dnaTurns + dnaSpin + (strandDirection < 0 ? Math.PI : 0);
+              const dnaAxisX = (particle.dnaPosition - 0.5) * dnaWidth;
               const dnaDepth = Math.cos(dnaAngle);
-              const dnaScale = 0.84 + (dnaDepth + 1) * 0.13;
-              const dnaStarX = centerX + (dnaX - centerX) * dnaScale;
-              const mateDepth = -dnaDepth;
-              const mateScale = 0.84 + (mateDepth + 1) * 0.13;
-              const mateX = centerX + (Math.sin(dnaAngle + Math.PI) * dnaWidth * 0.48) * mateScale;
-              const finalX = x + (dnaStarX - x) * dnaProgress;
+              const dnaHelixY = Math.sin(dnaAngle) * dnaRadius;
+              const dnaX = centerX + dnaAxisX * Math.cos(dnaTilt) - dnaDepth * dnaRadius * 0.25;
+              const dnaY = centerY + dnaAxisX * Math.sin(dnaTilt) + dnaHelixY;
+              const mateX = centerX + dnaAxisX * Math.cos(dnaTilt) + dnaDepth * dnaRadius * 0.25;
+              const mateY = centerY + dnaAxisX * Math.sin(dnaTilt) - dnaHelixY;
+              const finalX = x + (dnaX - x) * dnaProgress;
               const finalY = y + (dnaY - y) * dnaProgress;
               const twinkle = 0.58 + Math.sin(elapsed * 0.002 + particle.twinkle) * 0.3;
               const ambientOpacity = revealed ? 0.55 : 1;
               const alpha = Math.min(1, expansion * 1.7) * twinkle * ambientOpacity * Math.min(1, perspective);
               const color = particle.hue > 0.88 ? "255,184,116" : particle.hue > 0.72 ? "215,255,0" : "238,241,224";
 
-              if (dnaProgress > 0.05 && particle.dnaRung) {
-                cosmosContext.strokeStyle = `rgba(215,255,0,${0.11 * dnaProgress * ambientOpacity})`;
+              if (dnaProgress > 0.01 && particle.dnaRung) {
+                cosmosContext.strokeStyle = `rgba(215,255,0,${0.16 * dnaProgress * ambientOpacity})`;
                 cosmosContext.lineWidth = 0.65;
                 cosmosContext.beginPath();
                 cosmosContext.moveTo(finalX, finalY);
-                cosmosContext.lineTo(finalX + (mateX - finalX) * dnaProgress, finalY + (dnaY - finalY) * dnaProgress);
+                cosmosContext.lineTo(finalX + (mateX - finalX) * dnaProgress, finalY + (mateY - finalY) * dnaProgress);
                 cosmosContext.stroke();
               }
 

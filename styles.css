@@ -97,35 +97,49 @@ img { display: block; width: 100%; }
 }
 .wordmark { font-family: var(--serif); font-size: 28px; letter-spacing: -.07em; white-space: nowrap; }
 .black-hole-mark {
-  position: relative; display: inline-block; width: 30px; height: 28px; margin-right: 8px;
-  vertical-align: -.08em; flex: 0 0 30px; isolation: isolate;
+  position: relative; display: inline-block; width: 36px; height: 30px; margin-left: 9px;
+  vertical-align: -.08em; isolation: isolate;
 }
 .black-hole-mark::before, .black-hole-mark::after {
   position: absolute; top: 50%; left: 50%; content: ""; border-radius: 50%;
   transform-style: preserve-3d; transform-origin: center;
-  -webkit-mask: radial-gradient(ellipse, transparent 0 40%, #000 46% 67%, transparent 73%);
-  mask: radial-gradient(ellipse, transparent 0 40%, #000 46% 67%, transparent 73%);
 }
 .black-hole-mark::before {
-  width: 32px; height: 23px;
-  background: conic-gradient(from 15deg, transparent 0 8%, #8d4eff 14%, #ff9f43 27%, #fff2c3 37%, #ff7534 48%, transparent 58% 67%, #8d4eff 79%, #ffad53 91%, transparent);
-  animation: black-hole-orbit 8s linear infinite;
+  width: 35px; height: 28px;
+  background: radial-gradient(ellipse, transparent 0 30%, rgba(255,111,46,.08) 42%, rgba(255,150,68,.38) 50%, rgba(131,73,255,.16) 62%, transparent 76%);
+  filter: blur(1.1px);
+  animation: black-hole-halo 4.8s ease-in-out infinite;
 }
 .black-hole-mark::after {
-  width: 24px; height: 17px;
-  background: conic-gradient(from 200deg, transparent 0 10%, #ffcf83 21%, #ff6234 37%, transparent 49% 62%, #b165ff 75%, #fff0c1 88%, transparent);
-  animation: black-hole-orbit 5.5s linear infinite reverse;
+  width: 35px; height: 14px;
+  background: conic-gradient(from 12deg, transparent 0 7%, #8e59ff 12%, #ff843c 24%, #fff5d2 37%, #ff7130 49%, transparent 58% 70%, #ac65ff 82%, #ffb665 93%, transparent);
+  -webkit-mask: radial-gradient(ellipse, transparent 0 39%, #000 45% 75%, transparent 81%);
+  mask: radial-gradient(ellipse, transparent 0 39%, #000 45% 75%, transparent 81%);
+  animation: black-hole-orbit 7.5s linear infinite;
 }
-.black-hole-mark > span {
-  position: absolute; z-index: 1; top: 50%; left: 50%; width: 11px; height: 11px;
-  border: 1px solid rgba(255,190,116,.85); border-radius: 50%;
-  background: radial-gradient(circle at 34% 30%, #190e0a, #010102 68%);
-  box-shadow: 0 0 7px 2px rgba(255,119,46,.52), 0 0 15px rgba(121,70,255,.35);
+.black-hole-disk {
+  position: absolute; z-index: 1; top: 50%; left: 50%; width: 29px; height: 11px;
+  border-radius: 50%;
+  background: conic-gradient(from 185deg, transparent 0 9%, #ff6f37 19%, #fff0bc 34%, #ffa147 48%, transparent 58% 68%, #ae63ff 81%, #ffd297 92%, transparent);
+  -webkit-mask: radial-gradient(ellipse, transparent 0 37%, #000 45% 75%, transparent 82%);
+  mask: radial-gradient(ellipse, transparent 0 37%, #000 45% 75%, transparent 82%);
+  filter: drop-shadow(0 0 3px rgba(255,133,67,.85));
+  animation: black-hole-orbit 4.3s linear infinite reverse;
+}
+.black-hole-horizon {
+  position: absolute; z-index: 2; top: 50%; left: 50%; width: 12px; height: 12px;
+  border: 1px solid rgba(255,205,142,.84); border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #100908, #010102 70%);
+  box-shadow: 0 0 5px 1px rgba(255,119,46,.72), 0 0 12px rgba(121,70,255,.56);
   transform: translate(-50%,-50%);
 }
 @keyframes black-hole-orbit {
-  from { transform: translate(-50%,-50%) perspective(72px) rotateX(62deg) rotateZ(0deg); }
-  to { transform: translate(-50%,-50%) perspective(72px) rotateX(62deg) rotateZ(360deg); }
+  from { transform: translate(-50%,-50%) perspective(72px) rotateX(67deg) rotateZ(0deg); }
+  to { transform: translate(-50%,-50%) perspective(72px) rotateX(67deg) rotateZ(360deg); }
+}
+@keyframes black-hole-halo {
+  0%, 100% { opacity: .7; transform: translate(-50%,-50%) scale(.94); }
+  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.06); }
 }
 .cosmos-intro-enabled .wordmark .black-hole-mark { opacity: 0; transform: scale(.45); }
 .cosmos-intro-enabled body.cosmos-revealed .wordmark .black-hole-mark {
