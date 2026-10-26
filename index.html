@@ -285,6 +285,13 @@
         const duration = 5600;
         const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
         const particles = [];
+        const backgroundStars = [];
+        const planets = [
+          { x: 0.14, y: 0.22, radius: 13, hue: "115,151,177", ring: false },
+          { x: 0.81, y: 0.32, radius: 23, hue: "198,119,78", ring: true },
+          { x: 0.76, y: 0.78, radius: 9, hue: "126,141,184", ring: false },
+          { x: 0.3, y: 0.82, radius: 6, hue: "207,166,104", ring: false }
+        ];
         let canvasWidth = 0;
         let canvasHeight = 0;
         let startedAt;
@@ -302,6 +309,16 @@
         };
 
         const particleCount = Math.min(680, Math.max(300, Math.round(window.innerWidth * 0.48)));
+        const backgroundStarCount = Math.min(220, Math.max(110, Math.round(window.innerWidth * 0.16)));
+        for (let index = 0; index < backgroundStarCount; index += 1) {
+          backgroundStars.push({
+            x: Math.random(),
+            y: Math.random(),
+            size: Math.random() * 1.2 + 0.25,
+            twinkle: Math.random() * Math.PI * 2,
+            alpha: Math.random() * 0.32 + 0.12
+          });
+        }
         for (let index = 0; index < particleCount; index += 1) {
           particles.push({
             arm: index % 4,
@@ -320,6 +337,61 @@
         const smoothstep = (start, end, value) => {
           const progress = Math.max(0, Math.min(1, (value - start) / (end - start)));
           return progress * progress * (3 - 2 * progress);
+        };
+
+        const drawPlanet = (context, x, y, radius, hue, ring, elapsed) => {
+          context.save();
+          context.translate(x, y);
+
+          if (ring) {
+            context.save();
+            context.rotate(-0.16 + Math.sin(elapsed * 0.00008) * 0.025);
+            context.strokeStyle = `rgba(${hue},0.34)`;
+            context.lineWidth = radius * 0.28;
+            context.beginPath();
+            context.ellipse(0, 0, radius * 1.85, radius * 0.58, 0, 0, Math.PI * 2);
+            context.stroke();
+            context.restore();
+          }
+
+          const surface = context.createRadialGradient(-radius * 0.38, -radius * 0.42, radius * 0.05, 0, 0, radius * 1.35);
+          surface.addColorStop(0, `rgba(238,220,184,0.95)`);
+          surface.addColorStop(0.2, `rgba(${hue},0.95)`);
+          surface.addColorStop(0.72, `rgba(${hue},0.72)`);
+          surface.addColorStop(1, "rgba(5,7,12,0.96)");
+          context.shadowColor = `rgba(${hue},0.38)`;
+          context.shadowBlur = radius * 1.15;
+          context.fillStyle = surface;
+          context.beginPath();
+          context.arc(0, 0, radius, 0, Math.PI * 2);
+          context.fill();
+
+          context.save();
+          context.beginPath();
+          context.arc(0, 0, radius * 0.94, 0, Math.PI * 2);
+          context.clip();
+          context.globalAlpha = 0.2;
+          context.strokeStyle = "rgba(255,235,205,0.8)";
+          context.lineWidth = Math.max(1, radius * 0.08);
+          for (let band = -2; band <= 2; band += 1) {
+            const bandY = band * radius * 0.29 + Math.sin(elapsed * 0.00015 + band) * radius * 0.08;
+            context.beginPath();
+            context.ellipse(0, bandY, radius, radius * 0.24, 0, Math.PI, Math.PI * 2);
+            context.stroke();
+          }
+          context.restore();
+
+          if (ring) {
+            context.save();
+            context.rotate(-0.16 + Math.sin(elapsed * 0.00008) * 0.025);
+            context.strokeStyle = "rgba(232,207,165,0.62)";
+            context.lineWidth = Math.max(1, radius * 0.055);
+            context.beginPath();
+            context.ellipse(0, 0, radius * 1.9, radius * 0.6, 0, Math.PI * 1.08, Math.PI * 1.92);
+            context.stroke();
+            context.restore();
+          }
+          context.restore();
         };
 
         const drawBlackHole = (context, centerX, centerY, radius, rotation, opacity) => {
@@ -412,14 +484,40 @@
           const yawSin = Math.sin(sideYaw);
           const tiltCos = Math.cos(sideTilt);
           const tiltSin = Math.sin(sideTilt);
-          const dnaProgress = revealed ? 1 : smoothstep(0.35, 1, progress);
-          const dnaWidth = canvasWidth * 1.32;
+          const dnaProgress = smoothstep(1800, 15500, elapsed);
+          const dnaWidth = canvasWidth * 2.1;
           const dnaRadius = Math.min(canvasHeight * 0.16, 112);
-          const dnaTurns = 2.6;
-          const dnaSpin = Math.max(0, elapsed - duration * 0.48) * 0.000035;
+          const dnaTurns = 3;
+          const dnaSpin = Math.max(0, elapsed - 2200) * 0.000018;
           const dnaTilt = 0.13;
+          const scrollOffsetX = window.scrollY * 0.12;
+          const scrollOffsetY = window.scrollY * 0.035;
 
           cosmosContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+          backgroundStars.forEach((star) => {
+            const x = (star.x * canvasWidth - window.scrollY * 0.018 + canvasWidth) % canvasWidth;
+            const y = (star.y * canvasHeight - window.scrollY * 0.028 + canvasHeight) % canvasHeight;
+            const twinkle = 0.72 + Math.sin(elapsed * 0.0015 + star.twinkle) * 0.28;
+            cosmosContext.fillStyle = `rgba(224,231,245,${star.alpha * twinkle})`;
+            cosmosContext.beginPath();
+            cosmosContext.arc(x, y, star.size, 0, Math.PI * 2);
+            cosmosContext.fill();
+          });
+
+          const planetOpacity = smoothstep(2800, 8000, elapsed) * (revealed ? 0.72 : 1);
+          if (planetOpacity > 0.01) {
+            planets.forEach((planet, index) => {
+              const radius = planet.radius * (canvasWidth < 680 ? 0.78 : 1);
+              const wrap = canvasHeight + radius * 5;
+              const rawY = planet.y * canvasHeight - window.scrollY * (0.075 + index * 0.009);
+              const y = ((rawY + radius * 2) % wrap + wrap) % wrap - radius * 2;
+              const x = planet.x * canvasWidth - window.scrollY * (0.035 + index * 0.006);
+              cosmosContext.globalAlpha = planetOpacity;
+              drawPlanet(cosmosContext, x, y, radius, planet.hue, planet.ring, elapsed);
+            });
+            cosmosContext.globalAlpha = 1;
+          }
 
           const coreFade = 1 - smoothstep(0.42, 0.78, progress) * 0.92;
           const coreRadius = 2.2 + expansion * 4 + Math.max(0, 1 - progress * 2) * 2;
@@ -448,13 +546,13 @@
               const y = centerY + projectedY * perspective;
               const strandDirection = particle.dnaStrand === 0 ? 1 : -1;
               const dnaAngle = particle.dnaPosition * Math.PI * 2 * dnaTurns + dnaSpin + (strandDirection < 0 ? Math.PI : 0);
-              const dnaAxisX = (particle.dnaPosition - 0.5) * dnaWidth;
+              const dnaAxisX = (particle.dnaPosition - 0.5) * dnaWidth - scrollOffsetX;
               const dnaDepth = Math.cos(dnaAngle);
               const dnaHelixY = Math.sin(dnaAngle) * dnaRadius;
               const dnaX = centerX + dnaAxisX * Math.cos(dnaTilt) - dnaDepth * dnaRadius * 0.25;
-              const dnaY = centerY + dnaAxisX * Math.sin(dnaTilt) + dnaHelixY;
+              const dnaY = centerY + dnaAxisX * Math.sin(dnaTilt) + dnaHelixY - scrollOffsetY;
               const mateX = centerX + dnaAxisX * Math.cos(dnaTilt) + dnaDepth * dnaRadius * 0.25;
-              const mateY = centerY + dnaAxisX * Math.sin(dnaTilt) - dnaHelixY;
+              const mateY = centerY + dnaAxisX * Math.sin(dnaTilt) - dnaHelixY - scrollOffsetY;
               const finalX = x + (dnaX - x) * dnaProgress;
               const finalY = y + (dnaY - y) * dnaProgress;
               const twinkle = 0.58 + Math.sin(elapsed * 0.002 + particle.twinkle) * 0.3;
