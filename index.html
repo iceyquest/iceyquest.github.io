@@ -25,7 +25,7 @@
   <body id="top">
     <div class="cosmos-intro" aria-label="Cosmos intro">
       <canvas class="cosmos-canvas" aria-hidden="true"></canvas>
-      <p class="cosmos-title">I am the Sea</p>
+      <p class="cosmos-title">I am You and what I see is Me</p>
       <button class="cosmos-skip" type="button" autofocus>Skip intro</button>
     </div>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -270,13 +270,13 @@
       let cosmosResizeObserver;
 
       if (document.documentElement.classList.contains("cosmos-intro-enabled")) {
-        const duration = 4200;
+        const duration = 5600;
         const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
         const particles = [];
         let canvasWidth = 0;
         let canvasHeight = 0;
         let startedAt;
-        let finished = false;
+        let revealed = false;
         let cosmosFallback;
 
         const resizeCosmos = () => {
@@ -294,8 +294,8 @@
           particles.push({
             arm: index % 4,
             distance: Math.sqrt(Math.random()),
-            offset: (Math.random() - 0.5) * 0.65,
-            size: Math.random() * 1.7 + 0.45,
+            offset: (Math.random() - 0.5) * 0.9,
+            size: Math.random() * 1.9 + 0.5,
             twinkle: Math.random() * Math.PI * 2,
             hue: Math.random()
           });
@@ -307,79 +307,91 @@
         };
 
         const drawCosmos = (timestamp) => {
-          if (finished) return;
           if (startedAt === undefined) startedAt = timestamp;
           const elapsed = timestamp - startedAt;
           const progress = Math.min(1, elapsed / duration);
-          const expansion = smoothstep(0.06, 0.5, progress);
-          const collapse = 1 - smoothstep(0.68, 0.9, progress);
-          const rotation = elapsed * 0.00042;
+          const expansion = smoothstep(0.02, 0.78, progress);
+          const rotation = Math.min(elapsed, duration) * 0.00042 + Math.max(0, elapsed - duration) * 0.000012;
           const centerX = canvasWidth / 2;
           const centerY = canvasHeight / 2;
-          const galaxyRadius = Math.min(canvasWidth, canvasHeight) * 0.44;
+          const galaxyRadius = Math.hypot(canvasWidth, canvasHeight) * 0.56;
 
           cosmosContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
+          const coreFade = 1 - smoothstep(0.42, 0.78, progress) * 0.92;
           const coreRadius = 2.2 + expansion * 4 + Math.max(0, 1 - progress * 2) * 2;
           const coreGlow = cosmosContext.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 8);
-          coreGlow.addColorStop(0, "rgba(255,255,230,0.95)");
-          coreGlow.addColorStop(0.12, "rgba(215,255,0,0.8)");
+          coreGlow.addColorStop(0, `rgba(255,255,230,${0.95 * coreFade})`);
+          coreGlow.addColorStop(0.12, `rgba(215,255,0,${0.8 * coreFade})`);
           coreGlow.addColorStop(1, "rgba(215,255,0,0)");
           cosmosContext.fillStyle = coreGlow;
           cosmosContext.beginPath();
           cosmosContext.arc(centerX, centerY, coreRadius * 8, 0, Math.PI * 2);
           cosmosContext.fill();
 
-          if (progress > 0.08) {
+          if (progress > 0.015) {
             particles.forEach((particle) => {
-              const radius = particle.distance * galaxyRadius * expansion * collapse;
-              const spiral = particle.arm * Math.PI / 2 + particle.distance * 8.2 + rotation + particle.offset;
+              const radius = particle.distance * galaxyRadius * expansion;
+              const spiral = particle.arm * Math.PI / 2 + particle.distance * 5.4 + rotation + particle.offset;
               const x = centerX + Math.cos(spiral) * radius;
-              const y = centerY + Math.sin(spiral) * radius * 0.64;
-              const twinkle = 0.56 + Math.sin(elapsed * 0.004 + particle.twinkle) * 0.28;
-              const alpha = Math.min(1, expansion * 1.7) * twinkle;
+              const y = centerY + Math.sin(spiral) * radius;
+              const twinkle = 0.58 + Math.sin(elapsed * 0.002 + particle.twinkle) * 0.3;
+              const ambientOpacity = revealed ? 0.55 : 1;
+              const alpha = Math.min(1, expansion * 1.7) * twinkle * ambientOpacity;
               const color = particle.hue > 0.88 ? "255,184,116" : particle.hue > 0.72 ? "215,255,0" : "238,241,224";
 
+              if (particle.size > 1.85) {
+                cosmosContext.shadowColor = `rgba(${color},${alpha})`;
+                cosmosContext.shadowBlur = revealed ? 5 : 12;
+              } else {
+                cosmosContext.shadowBlur = 0;
+              }
               cosmosContext.fillStyle = `rgba(${color},${alpha})`;
               cosmosContext.beginPath();
               cosmosContext.arc(x, y, particle.size, 0, Math.PI * 2);
               cosmosContext.fill();
             });
           }
+          cosmosContext.shadowBlur = 0;
 
-          const titleOpacity = 1 - smoothstep(0.57, 0.7, progress);
-          cosmosIntro.querySelector(".cosmos-title").style.opacity = titleOpacity;
+          const titleOpacity = 1 - smoothstep(0.54, 0.69, progress);
+          cosmosIntro.querySelector(".cosmos-title").style.opacity = revealed ? 0 : titleOpacity;
 
-          if (progress >= 1) {
-            finishCosmos();
-            return;
+          if (progress >= 0.73 && !revealed) {
+            revealCosmos();
           }
           cosmosFrame = window.requestAnimationFrame(drawCosmos);
         };
 
-        const finishCosmos = () => {
-          if (finished) return;
-          finished = true;
-          window.cancelAnimationFrame(cosmosFrame);
+        const revealCosmos = () => {
+          if (revealed) return;
+          revealed = true;
           window.clearTimeout(cosmosFallback);
-          cosmosIntro.classList.add("cosmos-intro-exit");
           document.body.classList.add("cosmos-revealed");
-          window.setTimeout(() => {
-            cosmosIntro.remove();
-            document.body.style.overflow = "";
-            cosmosResizeObserver?.disconnect();
-          }, 900);
+          cosmosIntro.querySelector(".cosmos-title").setAttribute("aria-hidden", "true");
+          cosmosIntro.querySelector(".cosmos-skip").hidden = true;
+          document.body.style.overflow = "";
+        };
+
+        const skipCosmos = () => {
+          if (revealed) return;
+          startedAt = performance.now() - duration;
+          revealCosmos();
         };
 
         resizeCosmos();
         cosmosResizeObserver = new ResizeObserver(resizeCosmos);
         cosmosResizeObserver.observe(document.documentElement);
         document.body.style.overflow = "hidden";
-        cosmosIntro.querySelector(".cosmos-skip").addEventListener("click", finishCosmos);
+        cosmosIntro.querySelector(".cosmos-skip").addEventListener("click", skipCosmos);
         document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape" && !finished) finishCosmos();
+          if (event.key === "Escape" && !revealed) skipCosmos();
         });
-        cosmosFallback = window.setTimeout(finishCosmos, duration + 2500);
+        cosmosFallback = window.setTimeout(() => {
+          if (startedAt === undefined) startedAt = performance.now() - duration;
+          revealCosmos();
+          cosmosFrame = window.requestAnimationFrame(drawCosmos);
+        }, duration + 2500);
         cosmosFrame = window.requestAnimationFrame(drawCosmos);
       }
 
