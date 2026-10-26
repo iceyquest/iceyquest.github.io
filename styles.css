@@ -52,13 +52,15 @@ body {
   text-transform: uppercase; cursor: pointer;
 }
 .cosmos-skip:hover, .cosmos-skip:focus-visible { border-color: var(--accent); color: var(--accent); }
-.cosmos-intro-enabled .site-header,
+.cosmos-intro-enabled .site-header {
+  opacity: 0; transition: opacity 1.15s ease;
+}
 .cosmos-intro-enabled main,
 .cosmos-intro-enabled .site-footer {
   opacity: 0; filter: blur(9px);
   transition: opacity 1.15s ease, filter 1.15s ease;
 }
-.cosmos-intro-enabled body.cosmos-revealed .site-header,
+.cosmos-intro-enabled body.cosmos-revealed .site-header { opacity: 1; }
 .cosmos-intro-enabled body.cosmos-revealed main,
 .cosmos-intro-enabled body.cosmos-revealed .site-footer {
   opacity: 1; filter: blur(0);
@@ -351,7 +353,10 @@ blockquote cite { color: var(--muted); font: 10px var(--mono); letter-spacing: .
   html { scroll-padding-top: 70px; }
   body { background-size: 100px 100px; }
   .page-wrap { width: calc(100% - 40px); }
-  .site-header { height: 72px; min-height: 72px; padding-inline: 20px; }
+  .site-header {
+    position: sticky; z-index: 20; top: 0; height: 72px; min-height: 72px; padding-inline: 20px;
+    background: #0b0b0a; -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
   .wordmark { font-size: 24px; }
   .desktop-nav, .site-header > .availability { display: none; }
   .mobile-nav { position: relative; display: block; }

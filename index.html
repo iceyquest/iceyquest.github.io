@@ -283,7 +283,7 @@
 
       if (document.documentElement.classList.contains("cosmos-intro-enabled")) {
         const duration = 5600;
-        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, window.innerWidth < 680 ? 0.85 : 1.15);
         const particles = [];
         const backgroundStars = [];
         const planets = [
@@ -297,6 +297,10 @@
         let startedAt;
         let revealed = false;
         let cosmosFallback;
+        let lastFrameAt = 0;
+        let nextShootingStarAt = 6500 + Math.random() * 9500;
+        let shootingStar;
+        const frameInterval = 1000 / 24;
 
         const resizeCosmos = () => {
           canvasWidth = window.innerWidth;
@@ -308,8 +312,8 @@
           cosmosContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
         };
 
-        const particleCount = Math.min(680, Math.max(300, Math.round(window.innerWidth * 0.48)));
-        const backgroundStarCount = Math.min(220, Math.max(110, Math.round(window.innerWidth * 0.16)));
+        const particleCount = Math.min(window.innerWidth < 680 ? 220 : 440, Math.max(180, Math.round(window.innerWidth * 0.32)));
+        const backgroundStarCount = Math.min(window.innerWidth < 680 ? 75 : 140, Math.max(55, Math.round(window.innerWidth * 0.1)));
         for (let index = 0; index < backgroundStarCount; index += 1) {
           backgroundStars.push({
             x: Math.random(),
@@ -337,6 +341,11 @@
         const smoothstep = (start, end, value) => {
           const progress = Math.max(0, Math.min(1, (value - start) / (end - start)));
           return progress * progress * (3 - 2 * progress);
+        };
+
+        const smootherstep = (start, end, value) => {
+          const progress = Math.max(0, Math.min(1, (value - start) / (end - start)));
+          return progress * progress * progress * (progress * (progress * 6 - 15) + 10);
         };
 
         const drawPlanet = (context, x, y, radius, hue, ring, elapsed) => {
@@ -470,6 +479,11 @@
 
         const drawCosmos = (timestamp) => {
           if (startedAt === undefined) startedAt = timestamp;
+          if (timestamp - lastFrameAt < frameInterval) {
+            cosmosFrame = window.requestAnimationFrame(drawCosmos);
+            return;
+          }
+          lastFrameAt = timestamp;
           const elapsed = timestamp - startedAt;
           const progress = Math.min(1, elapsed / duration);
           const expansion = smoothstep(0.02, 0.78, progress);
@@ -484,20 +498,19 @@
           const yawSin = Math.sin(sideYaw);
           const tiltCos = Math.cos(sideTilt);
           const tiltSin = Math.sin(sideTilt);
-          const dnaProgress = smoothstep(1800, 15500, elapsed);
+          const dnaProgress = smootherstep(1200, 24000, elapsed);
           const dnaWidth = canvasWidth * 2.1;
           const dnaRadius = Math.min(canvasHeight * 0.16, 112);
           const dnaTurns = 3;
           const dnaSpin = Math.max(0, elapsed - 2200) * 0.000018;
           const dnaTilt = 0.13;
-          const scrollOffsetX = window.scrollY * 0.12;
-          const scrollOffsetY = window.scrollY * 0.035;
+          const scrollOffsetY = revealed ? (window.scrollY * 0.22) % canvasHeight : 0;
 
           cosmosContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
           backgroundStars.forEach((star) => {
-            const x = (star.x * canvasWidth - window.scrollY * 0.018 + canvasWidth) % canvasWidth;
-            const y = (star.y * canvasHeight - window.scrollY * 0.028 + canvasHeight) % canvasHeight;
+            const x = star.x * canvasWidth;
+            const y = (star.y * canvasHeight - window.scrollY * 0.025 + canvasHeight) % canvasHeight;
             const twinkle = 0.72 + Math.sin(elapsed * 0.0015 + star.twinkle) * 0.28;
             cosmosContext.fillStyle = `rgba(224,231,245,${star.alpha * twinkle})`;
             cosmosContext.beginPath();
@@ -517,6 +530,40 @@
               drawPlanet(cosmosContext, x, y, radius, planet.hue, planet.ring, elapsed);
             });
             cosmosContext.globalAlpha = 1;
+          }
+
+          if (elapsed >= nextShootingStarAt && !shootingStar) {
+            shootingStar = {
+              x: canvasWidth * (0.12 + Math.random() * 0.76),
+              y: canvasHeight * (Math.random() * 0.58),
+              angle: Math.PI * (0.13 + Math.random() * 0.1),
+              startedAt: timestamp,
+              duration: 850 + Math.random() * 500,
+              length: 90 + Math.random() * 100
+            };
+            nextShootingStarAt = elapsed + 6500 + Math.random() * 9500;
+          }
+          if (shootingStar) {
+            const streakProgress = Math.min(1, (timestamp - shootingStar.startedAt) / shootingStar.duration);
+            const streakOpacity = Math.sin(streakProgress * Math.PI) * (revealed ? 0.65 : 0.9);
+            const endX = shootingStar.x + Math.cos(shootingStar.angle) * shootingStar.length * streakProgress;
+            const endY = shootingStar.y + Math.sin(shootingStar.angle) * shootingStar.length * streakProgress;
+            const tailX = endX - Math.cos(shootingStar.angle) * shootingStar.length;
+            const tailY = endY - Math.sin(shootingStar.angle) * shootingStar.length;
+            const streak = cosmosContext.createLinearGradient(tailX, tailY, endX, endY);
+            streak.addColorStop(0, "rgba(210,230,255,0)");
+            streak.addColorStop(0.72, `rgba(210,230,255,${streakOpacity * 0.45})`);
+            streak.addColorStop(1, `rgba(255,255,255,${streakOpacity})`);
+            cosmosContext.strokeStyle = streak;
+            cosmosContext.lineWidth = 1.4;
+            cosmosContext.shadowColor = "rgba(213,230,255,0.8)";
+            cosmosContext.shadowBlur = 8;
+            cosmosContext.beginPath();
+            cosmosContext.moveTo(tailX, tailY);
+            cosmosContext.lineTo(endX, endY);
+            cosmosContext.stroke();
+            cosmosContext.shadowBlur = 0;
+            if (streakProgress >= 1) shootingStar = undefined;
           }
 
           const coreFade = 1 - smoothstep(0.42, 0.78, progress) * 0.92;
@@ -546,7 +593,7 @@
               const y = centerY + projectedY * perspective;
               const strandDirection = particle.dnaStrand === 0 ? 1 : -1;
               const dnaAngle = particle.dnaPosition * Math.PI * 2 * dnaTurns + dnaSpin + (strandDirection < 0 ? Math.PI : 0);
-              const dnaAxisX = (particle.dnaPosition - 0.5) * dnaWidth - scrollOffsetX;
+              const dnaAxisX = (particle.dnaPosition - 0.5) * dnaWidth;
               const dnaDepth = Math.cos(dnaAngle);
               const dnaHelixY = Math.sin(dnaAngle) * dnaRadius;
               const dnaX = centerX + dnaAxisX * Math.cos(dnaTilt) - dnaDepth * dnaRadius * 0.25;
@@ -555,6 +602,7 @@
               const mateY = centerY + dnaAxisX * Math.sin(dnaTilt) - dnaHelixY - scrollOffsetY;
               const finalX = x + (dnaX - x) * dnaProgress;
               const finalY = y + (dnaY - y) * dnaProgress;
+              const wrappedYPositions = revealed ? [finalY, finalY - canvasHeight, finalY + canvasHeight] : [finalY];
               const twinkle = 0.58 + Math.sin(elapsed * 0.002 + particle.twinkle) * 0.3;
               const ambientOpacity = revealed ? 0.55 : 1;
               const alpha = Math.min(1, expansion * 1.7) * twinkle * ambientOpacity * Math.min(1, perspective);
@@ -563,23 +611,28 @@
               if (dnaProgress > 0.01 && particle.dnaRung) {
                 cosmosContext.strokeStyle = `rgba(215,255,0,${0.16 * dnaProgress * ambientOpacity})`;
                 cosmosContext.lineWidth = 0.65;
-                cosmosContext.beginPath();
-                cosmosContext.moveTo(finalX, finalY);
-                cosmosContext.lineTo(finalX + (mateX - finalX) * dnaProgress, finalY + (mateY - finalY) * dnaProgress);
-                cosmosContext.stroke();
+                wrappedYPositions.forEach((positionY) => {
+                  cosmosContext.beginPath();
+                  cosmosContext.moveTo(finalX, positionY);
+                  cosmosContext.lineTo(finalX + (mateX - finalX) * dnaProgress, positionY + (mateY - finalY) * dnaProgress);
+                  cosmosContext.stroke();
+                });
               }
 
               const starSize = particle.size * Math.min(1.8, perspective);
-              if (starSize > 1.85) {
+              if (starSize > 2.3 && window.innerWidth >= 680) {
                 cosmosContext.shadowColor = `rgba(${color},${alpha})`;
-                cosmosContext.shadowBlur = revealed ? 5 : 12;
+                cosmosContext.shadowBlur = revealed ? 3 : 7;
               } else {
                 cosmosContext.shadowBlur = 0;
               }
               cosmosContext.fillStyle = `rgba(${color},${alpha})`;
-              cosmosContext.beginPath();
-              cosmosContext.arc(finalX, finalY, starSize * (1 - dnaProgress * 0.2), 0, Math.PI * 2);
-              cosmosContext.fill();
+              wrappedYPositions.forEach((positionY) => {
+                if (positionY < -starSize || positionY > canvasHeight + starSize) return;
+                cosmosContext.beginPath();
+                cosmosContext.arc(finalX, positionY, starSize * (1 - dnaProgress * 0.2), 0, Math.PI * 2);
+                cosmosContext.fill();
+              });
             });
           }
           cosmosContext.shadowBlur = 0;
