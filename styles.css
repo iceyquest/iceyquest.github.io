@@ -96,6 +96,41 @@ img { display: block; width: 100%; }
   justify-content: space-between; gap: 32px; border-bottom: 1px solid rgba(255,255,255,.035);
 }
 .wordmark { font-family: var(--serif); font-size: 28px; letter-spacing: -.07em; white-space: nowrap; }
+.black-hole-mark {
+  position: relative; display: inline-block; width: 30px; height: 28px; margin-right: 8px;
+  vertical-align: -.08em; flex: 0 0 30px; isolation: isolate;
+}
+.black-hole-mark::before, .black-hole-mark::after {
+  position: absolute; top: 50%; left: 50%; content: ""; border-radius: 50%;
+  transform-style: preserve-3d; transform-origin: center;
+  -webkit-mask: radial-gradient(ellipse, transparent 0 40%, #000 46% 67%, transparent 73%);
+  mask: radial-gradient(ellipse, transparent 0 40%, #000 46% 67%, transparent 73%);
+}
+.black-hole-mark::before {
+  width: 32px; height: 23px;
+  background: conic-gradient(from 15deg, transparent 0 8%, #8d4eff 14%, #ff9f43 27%, #fff2c3 37%, #ff7534 48%, transparent 58% 67%, #8d4eff 79%, #ffad53 91%, transparent);
+  animation: black-hole-orbit 8s linear infinite;
+}
+.black-hole-mark::after {
+  width: 24px; height: 17px;
+  background: conic-gradient(from 200deg, transparent 0 10%, #ffcf83 21%, #ff6234 37%, transparent 49% 62%, #b165ff 75%, #fff0c1 88%, transparent);
+  animation: black-hole-orbit 5.5s linear infinite reverse;
+}
+.black-hole-mark > span {
+  position: absolute; z-index: 1; top: 50%; left: 50%; width: 11px; height: 11px;
+  border: 1px solid rgba(255,190,116,.85); border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #190e0a, #010102 68%);
+  box-shadow: 0 0 7px 2px rgba(255,119,46,.52), 0 0 15px rgba(121,70,255,.35);
+  transform: translate(-50%,-50%);
+}
+@keyframes black-hole-orbit {
+  from { transform: translate(-50%,-50%) perspective(72px) rotateX(62deg) rotateZ(0deg); }
+  to { transform: translate(-50%,-50%) perspective(72px) rotateX(62deg) rotateZ(360deg); }
+}
+.cosmos-intro-enabled .wordmark .black-hole-mark { opacity: 0; transform: scale(.45); }
+.cosmos-intro-enabled body.cosmos-revealed .wordmark .black-hole-mark {
+  opacity: 1; transform: scale(1); transition: opacity .9s ease .32s, transform .9s cubic-bezier(.2,.7,.2,1) .32s;
+}
 .desktop-nav { display: flex; gap: clamp(25px, 5vw, 82px); margin-left: auto; margin-right: auto; }
 .desktop-nav a, .availability {
   color: #a6a49e; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
