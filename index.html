@@ -9,15 +9,25 @@
       content="Gaurav Sharma invites you to talk theology of automation."
     >
     <title>Gaurav Sharma — Product Designer</title>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("cosmos-intro-enabled");
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500&family=Press+Start+2P&display=swap"
       rel="stylesheet"
     >
     <link rel="stylesheet" href="styles.css">
   </head>
   <body id="top">
+    <div class="cosmos-intro" aria-label="Cosmos intro">
+      <canvas class="cosmos-canvas" aria-hidden="true"></canvas>
+      <p class="cosmos-title">I am the Sea</p>
+      <button class="cosmos-skip" type="button" autofocus>Skip intro</button>
+    </div>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -253,6 +263,126 @@
     </dialog>
 
     <script>
+      const cosmosIntro = document.querySelector(".cosmos-intro");
+      const cosmosCanvas = document.querySelector(".cosmos-canvas");
+      const cosmosContext = cosmosCanvas.getContext("2d");
+      let cosmosFrame;
+      let cosmosResizeObserver;
+
+      if (document.documentElement.classList.contains("cosmos-intro-enabled")) {
+        const duration = 4200;
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const particles = [];
+        let canvasWidth = 0;
+        let canvasHeight = 0;
+        let startedAt;
+        let finished = false;
+        let cosmosFallback;
+
+        const resizeCosmos = () => {
+          canvasWidth = window.innerWidth;
+          canvasHeight = window.innerHeight;
+          cosmosCanvas.width = Math.round(canvasWidth * pixelRatio);
+          cosmosCanvas.height = Math.round(canvasHeight * pixelRatio);
+          cosmosCanvas.style.width = `${canvasWidth}px`;
+          cosmosCanvas.style.height = `${canvasHeight}px`;
+          cosmosContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        };
+
+        const particleCount = Math.min(680, Math.max(300, Math.round(window.innerWidth * 0.48)));
+        for (let index = 0; index < particleCount; index += 1) {
+          particles.push({
+            arm: index % 4,
+            distance: Math.sqrt(Math.random()),
+            offset: (Math.random() - 0.5) * 0.65,
+            size: Math.random() * 1.7 + 0.45,
+            twinkle: Math.random() * Math.PI * 2,
+            hue: Math.random()
+          });
+        }
+
+        const smoothstep = (start, end, value) => {
+          const progress = Math.max(0, Math.min(1, (value - start) / (end - start)));
+          return progress * progress * (3 - 2 * progress);
+        };
+
+        const drawCosmos = (timestamp) => {
+          if (finished) return;
+          if (startedAt === undefined) startedAt = timestamp;
+          const elapsed = timestamp - startedAt;
+          const progress = Math.min(1, elapsed / duration);
+          const expansion = smoothstep(0.06, 0.5, progress);
+          const collapse = 1 - smoothstep(0.68, 0.9, progress);
+          const rotation = elapsed * 0.00042;
+          const centerX = canvasWidth / 2;
+          const centerY = canvasHeight / 2;
+          const galaxyRadius = Math.min(canvasWidth, canvasHeight) * 0.44;
+
+          cosmosContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+          const coreRadius = 2.2 + expansion * 4 + Math.max(0, 1 - progress * 2) * 2;
+          const coreGlow = cosmosContext.createRadialGradient(centerX, centerY, 0, centerX, centerY, coreRadius * 8);
+          coreGlow.addColorStop(0, "rgba(255,255,230,0.95)");
+          coreGlow.addColorStop(0.12, "rgba(215,255,0,0.8)");
+          coreGlow.addColorStop(1, "rgba(215,255,0,0)");
+          cosmosContext.fillStyle = coreGlow;
+          cosmosContext.beginPath();
+          cosmosContext.arc(centerX, centerY, coreRadius * 8, 0, Math.PI * 2);
+          cosmosContext.fill();
+
+          if (progress > 0.08) {
+            particles.forEach((particle) => {
+              const radius = particle.distance * galaxyRadius * expansion * collapse;
+              const spiral = particle.arm * Math.PI / 2 + particle.distance * 8.2 + rotation + particle.offset;
+              const x = centerX + Math.cos(spiral) * radius;
+              const y = centerY + Math.sin(spiral) * radius * 0.64;
+              const twinkle = 0.56 + Math.sin(elapsed * 0.004 + particle.twinkle) * 0.28;
+              const alpha = Math.min(1, expansion * 1.7) * twinkle;
+              const color = particle.hue > 0.88 ? "255,184,116" : particle.hue > 0.72 ? "215,255,0" : "238,241,224";
+
+              cosmosContext.fillStyle = `rgba(${color},${alpha})`;
+              cosmosContext.beginPath();
+              cosmosContext.arc(x, y, particle.size, 0, Math.PI * 2);
+              cosmosContext.fill();
+            });
+          }
+
+          const titleOpacity = 1 - smoothstep(0.57, 0.7, progress);
+          cosmosIntro.querySelector(".cosmos-title").style.opacity = titleOpacity;
+
+          if (progress >= 1) {
+            finishCosmos();
+            return;
+          }
+          cosmosFrame = window.requestAnimationFrame(drawCosmos);
+        };
+
+        const finishCosmos = () => {
+          if (finished) return;
+          finished = true;
+          window.cancelAnimationFrame(cosmosFrame);
+          window.clearTimeout(cosmosFallback);
+          cosmosIntro.classList.add("cosmos-intro-exit");
+          document.body.classList.add("cosmos-revealed");
+          window.setTimeout(() => {
+            cosmosIntro.remove();
+            document.body.style.overflow = "";
+            cosmosResizeObserver?.disconnect();
+          }, 900);
+        };
+
+        resizeCosmos();
+        cosmosResizeObserver = new ResizeObserver(resizeCosmos);
+        cosmosResizeObserver.observe(document.documentElement);
+        document.body.style.overflow = "hidden";
+        cosmosIntro.querySelector(".cosmos-skip").addEventListener("click", finishCosmos);
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !finished) finishCosmos();
+        });
+        cosmosFallback = window.setTimeout(finishCosmos, duration + 2500);
+        cosmosFrame = window.requestAnimationFrame(drawCosmos);
+      }
+
       const caseStudyDialog = document.querySelector(".case-study-dialog");
       const caseStudyTitle = document.querySelector("#case-study-title");
       const caseStudyExternal = document.querySelector(".case-study-external");
