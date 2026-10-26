@@ -295,6 +295,7 @@
             arm: index % 4,
             distance: Math.sqrt(Math.random()),
             offset: (Math.random() - 0.5) * 0.9,
+            depth: (Math.random() - 0.5) * 0.22,
             size: Math.random() * 1.9 + 0.5,
             twinkle: Math.random() * Math.PI * 2,
             hue: Math.random()
@@ -315,6 +316,13 @@
           const centerX = canvasWidth / 2;
           const centerY = canvasHeight / 2;
           const galaxyRadius = Math.hypot(canvasWidth, canvasHeight) * 0.56;
+          const cameraDistance = galaxyRadius * (2.35 - progress * 0.62);
+          const sideYaw = 0.24;
+          const sideTilt = 1.12;
+          const yawCos = Math.cos(sideYaw);
+          const yawSin = Math.sin(sideYaw);
+          const tiltCos = Math.cos(sideTilt);
+          const tiltSin = Math.sin(sideTilt);
 
           cosmosContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -333,14 +341,23 @@
             particles.forEach((particle) => {
               const radius = particle.distance * galaxyRadius * expansion;
               const spiral = particle.arm * Math.PI / 2 + particle.distance * 5.4 + rotation + particle.offset;
-              const x = centerX + Math.cos(spiral) * radius;
-              const y = centerY + Math.sin(spiral) * radius;
+              const diskX = Math.cos(spiral) * radius;
+              const diskY = Math.sin(spiral) * radius;
+              const depth = particle.depth * galaxyRadius * expansion;
+              const yawX = diskX * yawCos + diskY * yawSin;
+              const yawDepth = -diskX * yawSin + diskY * yawCos;
+              const projectedY = yawDepth * tiltCos - depth * tiltSin;
+              const cameraDepth = yawDepth * tiltSin + depth * tiltCos;
+              const perspective = Math.max(0.62, Math.min(1.8, cameraDistance / (cameraDistance - cameraDepth)));
+              const x = centerX + yawX * perspective;
+              const y = centerY + projectedY * perspective;
               const twinkle = 0.58 + Math.sin(elapsed * 0.002 + particle.twinkle) * 0.3;
               const ambientOpacity = revealed ? 0.55 : 1;
-              const alpha = Math.min(1, expansion * 1.7) * twinkle * ambientOpacity;
+              const alpha = Math.min(1, expansion * 1.7) * twinkle * ambientOpacity * Math.min(1, perspective);
               const color = particle.hue > 0.88 ? "255,184,116" : particle.hue > 0.72 ? "215,255,0" : "238,241,224";
 
-              if (particle.size > 1.85) {
+              const starSize = particle.size * Math.min(1.8, perspective);
+              if (starSize > 1.85) {
                 cosmosContext.shadowColor = `rgba(${color},${alpha})`;
                 cosmosContext.shadowBlur = revealed ? 5 : 12;
               } else {
@@ -348,7 +365,7 @@
               }
               cosmosContext.fillStyle = `rgba(${color},${alpha})`;
               cosmosContext.beginPath();
-              cosmosContext.arc(x, y, particle.size, 0, Math.PI * 2);
+              cosmosContext.arc(x, y, starSize, 0, Math.PI * 2);
               cosmosContext.fill();
             });
           }
