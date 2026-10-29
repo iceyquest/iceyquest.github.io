@@ -102,16 +102,20 @@ img { display: block; width: 100%; }
   position: relative; display: inline-block; width: 40px; height: 30px; margin-left: 9px;
   vertical-align: -.08em; isolation: isolate;
 }
-.black-hole-mark::before, .black-hole-mark::after {
+.black-hole-art {
+  position: absolute; inset: 0;
+  animation: black-hole-spin 42s linear infinite;
+}
+.black-hole-art::before, .black-hole-art::after {
   position: absolute; top: 50%; left: 50%; content: ""; border-radius: 50%;
 }
-.black-hole-mark::before {
+.black-hole-art::before {
   width: 40px; height: 25px;
   background: radial-gradient(ellipse, transparent 0 20%, rgba(255,204,134,.15) 31%, rgba(255,110,48,.24) 43%, rgba(132,81,255,.12) 58%, transparent 74%);
   filter: blur(1.4px);
   animation: black-hole-halo 6s ease-in-out infinite;
 }
-.black-hole-mark::after {
+.black-hole-art::after {
   z-index: 3; width: 19px; height: 7px; top: calc(50% - 1px);
   border-top: 1px solid rgba(255,246,218,.98); border-radius: 50%;
   box-shadow: 0 -1px 5px rgba(255,167,92,.95);
@@ -142,6 +146,10 @@ img { display: block; width: 100%; }
 @keyframes black-hole-flow {
   from { background-position: 0% 50%; }
   to { background-position: 100% 50%; }
+}
+@keyframes black-hole-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 @keyframes black-hole-halo {
   0%, 100% { opacity: .72; transform: translate(-50%,-50%) scale(.96); }
