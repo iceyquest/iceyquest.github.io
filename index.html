@@ -318,8 +318,8 @@
           cosmosContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
         };
 
-        const particleCount = Math.min(window.innerWidth < 680 ? 220 : 440, Math.max(180, Math.round(window.innerWidth * 0.32)));
-        const backgroundStarCount = Math.min(window.innerWidth < 680 ? 75 : 140, Math.max(55, Math.round(window.innerWidth * 0.1)));
+        const particleCount = Math.min(window.innerWidth < 680 ? 360 : 850, Math.max(280, Math.round(window.innerWidth * 0.58)));
+        const backgroundStarCount = Math.min(window.innerWidth < 680 ? 110 : 210, Math.max(85, Math.round(window.innerWidth * 0.15)));
         for (let index = 0; index < backgroundStarCount; index += 1) {
           backgroundStars.push({
             x: Math.random(),
@@ -406,81 +406,6 @@
             context.stroke();
             context.restore();
           }
-          context.restore();
-        };
-
-        const drawBlackHole = (context, centerX, centerY, radius, rotation, opacity) => {
-          context.save();
-          context.translate(centerX, centerY);
-          context.rotate(-0.08);
-          context.globalAlpha = opacity;
-
-          const halo = context.createRadialGradient(0, 0, radius * 0.45, 0, 0, radius * 2.8);
-          halo.addColorStop(0, "rgba(255,246,218,0.34)");
-          halo.addColorStop(0.22, "rgba(255,161,78,0.22)");
-          halo.addColorStop(0.42, "rgba(255,111,47,0.1)");
-          halo.addColorStop(1, "rgba(255,75,20,0)");
-          context.fillStyle = halo;
-          context.beginPath();
-          context.arc(0, 0, radius * 2.8, 0, Math.PI * 2);
-          context.fill();
-
-          const flow = rotation * 0.16;
-          const disk = context.createLinearGradient(-radius * 1.8, 0, radius * 1.8, 0);
-          disk.addColorStop(0, "rgba(164,86,216,0.48)");
-          disk.addColorStop(0.15, "rgba(255,97,37,0.96)");
-          disk.addColorStop(0.32, "rgba(255,172,80,1)");
-          disk.addColorStop(0.46, "rgba(255,250,222,1)");
-          disk.addColorStop(0.56, "rgba(255,216,151,1)");
-          disk.addColorStop(0.72, "rgba(255,132,49,1)");
-          disk.addColorStop(0.88, "rgba(255,98,39,0.94)");
-          disk.addColorStop(1, "rgba(164,86,216,0.48)");
-          context.strokeStyle = disk;
-          context.lineWidth = radius * 0.28;
-          context.shadowColor = "rgba(255,157,72,0.96)";
-          context.shadowBlur = radius * 0.72;
-          context.beginPath();
-          context.ellipse(0, 0, radius * 1.62, radius * 0.46, 0, 0, Math.PI * 2);
-          context.stroke();
-
-          for (let stream = 0; stream < 7; stream += 1) {
-            const angle = flow + stream * Math.PI * 2 / 7;
-            const pointX = Math.cos(angle) * radius * 1.55;
-            const pointY = Math.sin(angle) * radius * 0.43;
-            const streakGradient = context.createRadialGradient(pointX, pointY, 0, pointX, pointY, radius * 0.25);
-            streakGradient.addColorStop(0, stream % 3 === 0 ? "rgba(255,255,238,1)" : "rgba(255,194,112,0.92)");
-            streakGradient.addColorStop(1, "rgba(255,114,41,0)");
-            context.fillStyle = streakGradient;
-            context.beginPath();
-            context.ellipse(pointX, pointY, radius * 0.25, radius * 0.075, angle, 0, Math.PI * 2);
-            context.fill();
-          }
-
-          const horizonRadius = radius * 0.64;
-          context.shadowBlur = radius * 0.22;
-          context.strokeStyle = "rgba(255,239,205,1)";
-          context.lineWidth = Math.max(1, radius * 0.055);
-          context.beginPath();
-          context.ellipse(0, 0, horizonRadius * 1.1, horizonRadius * 0.94, 0, 0, Math.PI * 2);
-          context.stroke();
-
-          const horizon = context.createRadialGradient(-horizonRadius * 0.28, -horizonRadius * 0.3, 0, 0, 0, horizonRadius);
-          horizon.addColorStop(0, "#000");
-          horizon.addColorStop(0.86, "#010102");
-          horizon.addColorStop(1, "#160d12");
-          context.shadowColor = "rgba(0,0,0,1)";
-          context.shadowBlur = radius * 0.32;
-          context.fillStyle = horizon;
-          context.beginPath();
-          context.arc(0, 0, horizonRadius, 0, Math.PI * 2);
-          context.fill();
-
-          context.shadowBlur = radius * 0.24;
-          context.strokeStyle = "rgba(255,235,197,1)";
-          context.lineWidth = Math.max(1, radius * 0.06);
-          context.beginPath();
-          context.ellipse(0, 0, horizonRadius * 1.1, horizonRadius * 0.94, 0, Math.PI * 1.02, Math.PI * 1.98);
-          context.stroke();
           context.restore();
         };
 
@@ -643,12 +568,6 @@
             });
           }
           cosmosContext.shadowBlur = 0;
-
-          const blackHoleOpacity = 1 - smoothstep(0.62, 0.92, progress);
-          if (blackHoleOpacity > 0.015) {
-            const blackHoleScale = 0.55 + expansion * 0.45;
-            drawBlackHole(cosmosContext, centerX, centerY, 36 * blackHoleScale, elapsed * 0.00055, blackHoleOpacity);
-          }
 
           const titleOpacity = 1 - smoothstep(0.54, 0.69, progress);
           cosmosIntro.querySelector(".cosmos-title").style.opacity = revealed ? 0 : titleOpacity;

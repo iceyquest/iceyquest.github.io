@@ -111,36 +111,36 @@ img { display: block; width: 100%; }
 }
 .black-hole-art::before {
   width: 40px; height: 25px;
-  background: radial-gradient(ellipse, transparent 0 20%, rgba(255,204,134,.15) 31%, rgba(255,110,48,.24) 43%, rgba(132,81,255,.12) 58%, transparent 74%);
+  background: radial-gradient(ellipse, transparent 0 20%, rgba(210,205,255,.14) 31%, rgba(139,125,255,.2) 43%, rgba(132,81,255,.12) 58%, transparent 74%);
   filter: blur(1.4px);
   animation: black-hole-halo 6s ease-in-out infinite;
 }
 .black-hole-art::after {
   z-index: 3; width: 19px; height: 7px; top: calc(50% - 1px);
-  border-top: 1px solid rgba(255,246,218,.98); border-radius: 50%;
-  box-shadow: 0 -1px 5px rgba(255,167,92,.95);
+  border-top: 1px solid rgba(238,234,255,.98); border-radius: 50%;
+  box-shadow: 0 -1px 5px rgba(174,158,255,.85);
   transform: translate(-50%,-155%) rotate(-8deg);
 }
 .black-hole-disk {
   position: absolute; z-index: 1; top: 50%; left: 50%; width: 38px; height: 7px;
   border-radius: 50%;
-  background: linear-gradient(90deg, #9a55dc 0%, #f27b42 18%, #ffd69a 34%, #fff8df 43%, #ff9a4f 57%, #f2ae67 75%, #a964df 100%);
+  background: linear-gradient(90deg, #7655d9 0%, #9a8bff 18%, #d7d1ff 34%, #fff 43%, #d4d0ff 57%, #a7a0ff 75%, #7655d9 100%);
   background-size: 220% 100%;
-  box-shadow: 0 0 4px 1px rgba(255,133,67,.76), 0 0 10px rgba(255,111,46,.3);
+  box-shadow: 0 0 4px 1px rgba(181,166,255,.72), 0 0 10px rgba(119,94,255,.35);
   transform: translate(-50%,-50%) rotate(-5deg);
   animation: black-hole-flow 8s ease-in-out infinite alternate;
 }
 .black-hole-disk::after {
   position: absolute; content: ""; z-index: -1; top: 2px; left: 50%;
-  width: 18px; height: 7px; border-bottom: 1px solid rgba(255,179,103,.92);
-  border-radius: 50%; box-shadow: 0 2px 4px rgba(255,124,58,.68);
+  width: 18px; height: 7px; border-bottom: 1px solid rgba(185,175,255,.92);
+  border-radius: 50%; box-shadow: 0 2px 4px rgba(119,94,255,.58);
   transform: translateX(-50%) rotate(5deg);
 }
 .black-hole-horizon {
   position: absolute; z-index: 2; top: 50%; left: 50%; width: 13px; height: 13px;
   border: 1px solid rgba(255,214,166,.92); border-radius: 50%;
   background: radial-gradient(circle at 40% 34%, #070607 0 54%, #010102 75%);
-  box-shadow: 0 0 4px 1px rgba(255,137,64,.55), 0 0 11px 2px rgba(110,66,182,.24);
+  box-shadow: 0 0 4px 1px rgba(172,159,255,.45), 0 0 11px 2px rgba(110,66,182,.24);
   transform: translate(-50%,-50%);
 }
 @keyframes black-hole-flow {
