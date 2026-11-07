@@ -325,30 +325,6 @@ blockquote cite { color: var(--muted); font: 10px var(--mono); letter-spacing: .
 .skills { margin-top: 36px; }
 .skills > p, .socials > p { margin-bottom: 18px; color: #b9b7b0; font: 11px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
 .skills .tag-list { gap: 8px; }
-.about-game-card {
-  display: grid; grid-template-columns: 118px minmax(0, 1fr); min-height: 126px; margin-top: 34px;
-  overflow: hidden; border: 1px solid rgba(215,255,0,.3); background: linear-gradient(115deg, rgba(215,255,0,.055), transparent 46%), #111110;
-  transition: border-color .2s ease, transform .2s ease, background-color .2s ease;
-}
-.about-game-card:hover { border-color: var(--accent); transform: translateY(-2px); background-color: #151513; }
-.about-game-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.about-game-art {
-  position: relative; min-height: 126px; overflow: hidden; background-color: #090a17;
-  background-image: linear-gradient(rgba(139,145,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(139,145,255,.08) 1px, transparent 1px), radial-gradient(ellipse at 50% 52%, #28224e, #090a17 72%);
-  background-size: 16px 16px, 16px 16px, auto;
-}
-.about-game-stars { position: absolute; inset: 0; opacity: .8; background-image: radial-gradient(#fff 1px, transparent 1.5px), radial-gradient(#d7ff00 1px, transparent 1.5px); background-size: 31px 37px, 47px 43px; background-position: 4px 9px, 17px 18px; }
-.about-game-orbit { position: absolute; top: 49%; left: 51%; width: 85px; height: 42px; border: 1px solid rgba(215,255,0,.5); border-radius: 50%; transform: translate(-50%,-50%) rotate(-23deg); }
-.about-game-planet { position: absolute; top: 49%; left: 51%; width: 35px; height: 35px; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #fff8ac 0 7%, #ffd950 20%, #fc852f 50%, #853857 76%, #17132d 82%); box-shadow: 0 0 20px #ff9a4f85; transform: translate(-50%,-50%); }
-.about-game-pixel { position: absolute; top: 19px; right: 15px; width: 6px; height: 6px; background: var(--accent); box-shadow: 0 0 0 3px #d7ff002d, 0 0 14px var(--accent); }
-.about-game-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; padding: 13px 15px; }
-.about-game-kicker { color: #aaa8a1; font: 8px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-.about-game-copy > strong { color: #f1eee8; font: 400 24px/1.1 var(--serif); letter-spacing: -.03em; }
-.about-game-copy > span:nth-child(3) { color: var(--muted); font-size: 10px; line-height: 1.5; }
-.about-game-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 2px; color: var(--accent); font: 9px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
-.about-game-link b { font: 13px var(--sans); transition: transform .2s ease; }
-.about-game-card:hover .about-game-link b { transform: translate(2px,-2px); }
-
 .section-contact { padding-block: 120px 100px; }
 .contact-grid { margin-top: 70px; display: grid; grid-template-columns: 1fr .58fr; gap: 14%; }
 .contact-grid h2 { margin-bottom: 25px; font-size: clamp(64px, 9vw, 120px); }
