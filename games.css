@@ -44,46 +44,15 @@
 .arcade-card { min-width: 0; overflow: hidden; padding: 8px; border: 1px solid rgba(179, 174, 255, .24); border-radius: 14px; background: linear-gradient(145deg, rgba(28, 27, 46, .96), rgba(12, 13, 23, .98) 62%); box-shadow: 0 12px 32px #0003, inset 0 1px #ffffff08; transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
 .arcade-card:hover { border-color: rgba(215, 255, 0, .72); transform: translateY(-5px); box-shadow: 0 20px 56px #0007, 0 0 30px #8e73ff15; }
 .arcade-card-art { position: relative; display: grid; min-height: 225px; aspect-ratio: 1.8; place-items: center; overflow: hidden; border: 1px solid rgba(255,255,255,.1); border-radius: 8px; color: #fff; background: radial-gradient(ellipse at 50% 49%, #282252 0, #13142b 45%, #090a13 83%); }
-.card-scanlines { position: absolute; z-index: 1; inset: 0; pointer-events: none; opacity: .16; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,.7) 4px); }
-.molluska-card-art { background: radial-gradient(ellipse at 50% 54%, #273d49 0, #17242c 43%, #0b1118 84%); }
-.molluska-cell { position: absolute; width: 22px; height: 22px; border: 3px solid #8ce2b3; background: #356c70; box-shadow: 0 0 20px #72d9a85c; image-rendering: pixelated; }
-.cell-one { top: 35%; left: 42%; width: 44px; height: 38px; border-radius: 42% 58% 47% 53%; background: #6cbf9a; }
-.cell-two { top: 30%; left: 61%; width: 17px; height: 17px; border-color: #e28fc0; background: #9d5a91; }
-.cell-three { top: 60%; left: 32%; width: 12px; height: 12px; border-color: #dfc67e; background: #b48d54; }
-.molluska-gene { position: absolute; width: 7px; height: 7px; background: #e8c773; box-shadow: 0 0 12px #e8c773aa; }
-.gene-one { top: 25%; left: 32%; }.gene-two { top: 64%; left: 65%; }
-.treta-card-art { background: radial-gradient(ellipse at 50% 56%, #4b371a 0, #183d33 44%, #0b171b 86%); }
-.treta-canopy { position: absolute; top: 23%; width: 40%; height: 34%; border-radius: 50%; background: radial-gradient(ellipse at 40% 35%, #78a65a, #286144 63%, #142d28 100%); }
-.canopy-one { left: 2%; transform: rotate(-15deg); }.canopy-two { right: 2%; transform: rotate(15deg); }.canopy-three { top: 12%; left: 33%; width: 34%; height: 29%; background: radial-gradient(ellipse at 42% 32%, #91b96c, #3c7950 66%, #1a3b30); }
-.treta-river { position: absolute; right: -5%; bottom: 10%; left: -5%; height: 26%; border-top: 2px solid #d3cb91; background: linear-gradient(180deg, #7ec6bd, #2c8190 58%, #1d5266); clip-path: polygon(0 28%, 100% 0, 100% 100%, 0 100%); }
-.treta-altar { position: absolute; z-index: 1; bottom: 24%; left: 50%; width: 34px; height: 15px; background: #9c6632; transform: translateX(-50%); box-shadow: 0 5px #5c3c25, 0 9px 0 -3px #d0a453; }
-.treta-flame { position: absolute; z-index: 2; bottom: 38%; left: 50%; width: 13px; height: 26px; background: linear-gradient(0deg, #f0481f, #ffae39 58%, #fff0a0); clip-path: polygon(50% 0, 83% 45%, 73% 100%, 25% 100%, 13% 48%); filter: drop-shadow(0 0 12px #ff8c35); transform: translateX(-50%); }
-.antimatter-card-art { background-color: #11101e; background-image: radial-gradient(circle at 50% 48%, #482b55 0, #21172e 39%, #0c0d19 82%); }
-.antimatter-moon { position: absolute; top: 22%; right: 25%; width: 48px; aspect-ratio: 1; border-radius: 50%; background: #e2c5bd; box-shadow: 0 0 34px #d6a4e355, inset -9px -5px 0 #9c7c97; }
-.antimatter-manor { position: absolute; bottom: 20%; left: 50%; width: 44%; height: 48%; transform: translateX(-50%); background: linear-gradient(90deg, #100e1a, #282036 48%, #100e1a); clip-path: polygon(0 28%, 13% 28%, 13% 13%, 30% 13%, 30% 28%, 37% 28%, 50% 0, 63% 28%, 70% 28%, 70% 13%, 87% 13%, 87% 28%, 100% 28%, 100% 100%, 0 100%); filter: drop-shadow(0 0 12px #cc8ee933); }
-.antimatter-manor i { position: absolute; top: 40%; width: 8%; height: 14%; background: #e4a866; box-shadow: 0 0 12px #f3b865aa; }
-.antimatter-manor i:nth-child(1) { left: 20%; }.antimatter-manor i:nth-child(2) { left: 38%; }.antimatter-manor i:nth-child(3) { right: 38%; }.antimatter-manor i:nth-child(4) { right: 20%; }
-.antimatter-manor b { position: absolute; bottom: 0; left: 44%; width: 14%; height: 25%; background: #090912; border: 1px solid #c78fcf; border-bottom: 0; }
-.antimatter-ghost { position: absolute; z-index: 1; top: 34%; left: 30%; width: 34px; height: 45px; border-radius: 48% 48% 12% 12%; background: linear-gradient(180deg, #e8d5ff, #a580d2 72%, #60477f); box-shadow: 0 0 24px #d7aaff99; }
-.antimatter-ghost::before { position: absolute; right: 8px; bottom: 16px; left: 8px; height: 5px; background: #261b39; content: ""; box-shadow: 9px 0 #261b39; }
-.antimatter-ghost::after { position: absolute; right: -4px; bottom: -3px; left: -4px; height: 10px; background: #a580d2; clip-path: polygon(0 0, 24% 40%, 48% 0, 74% 40%, 100% 0, 100% 100%, 0 100%); content: ""; }
-.dinoaea-card-art { background-color: #0c1718; background-image: radial-gradient(ellipse at 50% 80%, #2f5c3a 0, #172f2c 46%, #0c141b 82%); }
-.dinoaea-moon { position: absolute; top: 17%; right: 24%; width: 43px; aspect-ratio: 1; border-radius: 50%; background: #d3cb91; box-shadow: 0 0 25px #e4d59b55; }
-.dinoaea-vine { position: absolute; bottom: 15%; width: 36%; height: 62%; border: 3px solid #477f50; border-bottom: 0; border-radius: 55% 55% 0 0; opacity: .7; }
-.vine-one { left: 9%; transform: rotate(-24deg); }.vine-two { right: 8%; transform: rotate(21deg); }
-.dinoaea-leaf { position: absolute; z-index: 1; width: 82px; height: 35px; border: 2px solid #9acc60; border-radius: 100% 0 100% 0; background: linear-gradient(145deg, #93c85a, #286947 72%); box-shadow: inset 0 -7px #123e35; }
-.leaf-one { bottom: 28%; left: 19%; transform: rotate(15deg); }.leaf-two { right: 17%; bottom: 26%; transform: scaleX(-1) rotate(15deg); }
-.dinoaea-stem { position: absolute; bottom: 15%; left: 49%; width: 12px; height: 42%; border-radius: 50% 50% 0 0; background: linear-gradient(90deg, #245741, #9acc60 52%, #285c43); transform: rotate(-4deg); }
-.dinoaea-trap { position: absolute; z-index: 2; top: 28%; left: 50%; width: 86px; height: 64px; border: 3px solid #c7e77a; border-radius: 55% 45% 50% 50%; background: radial-gradient(ellipse at 50% 60%, #d65766, #a53249 50%, #286447 53%); box-shadow: 0 0 26px #e35b7266, inset 0 -8px #173d31; transform: translateX(-50%) rotate(-7deg); }
-.dinoaea-trap::before, .dinoaea-trap::after { position: absolute; top: -11px; width: 10px; height: 14px; background: #d7ed9b; clip-path: polygon(50% 100%, 0 0, 100% 0); content: ""; }
-.dinoaea-trap::before { left: 20%; }.dinoaea-trap::after { right: 20%; }
-.dinoaea-trap i { position: absolute; top: 22px; left: 23px; width: 8px; height: 8px; border-radius: 50%; background: #f9e5a5; box-shadow: 23px 0 #f9e5a5, 0 0 9px #fff3bd; }
-.dinoaea-trap b { position: absolute; bottom: 12px; left: 35px; width: 12px; height: 9px; border-radius: 50%; background: #241a24; }
+.cover-art-image, .cover-art-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cover-art-image { object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .4s ease; }
+.arcade-card:hover .cover-art-image { transform: scale(1.055); filter: saturate(1.12) contrast(1.04); }
+.cover-art-shade { z-index: 1; background: linear-gradient(180deg, #05071134 0%, transparent 36%, #06081008 48%, #060810d9 100%); }
 .card-index, .card-status, .card-art-caption { position: absolute; z-index: 2; color: #d3cee8; font: 8px var(--mono); letter-spacing: .13em; }
 .card-index { top: 14px; left: 15px; padding: 7px 9px; border: 1px solid #ffffff24; border-radius: 4px; background: #090a13a8; }.card-status { top: 14px; right: 15px; padding: 7px 9px; border: 1px solid #d7ff0055; border-radius: 4px; color: var(--accent); background: #090a13a8; }
 .card-status i { display: inline-block; width: 6px; height: 6px; margin: 0 5px 1px 0; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-.card-art-title { position: relative; z-index: 2; margin-top: -6px; color: #fff5cb; font: clamp(16px, 2vw, 24px)/1.65 "Press Start 2P", var(--mono); letter-spacing: .035em; text-align: center; text-shadow: 3px 3px #8d3e91, 0 0 24px #d7ff0070; }
-.card-art-caption { right: 15px; bottom: 14px; padding: 6px 8px; border: 1px solid #ffffff20; border-radius: 4px; color: #c1bbd6; background: #090a13a8; font-size: 7px; }
+.card-art-title { position: absolute; z-index: 2; right: 22px; bottom: 44px; left: 22px; margin: 0; color: #fff9e9; font: clamp(20px, 2.7vw, 34px)/1.25 "Press Start 2P", var(--mono); letter-spacing: .02em; text-align: left; text-shadow: 3px 4px #15111e, 0 0 26px #000b; }
+.card-art-caption { right: auto; bottom: 17px; left: 23px; padding: 0; border: 0; border-radius: 0; color: #e5dfd1; background: transparent; font-size: 8px; text-shadow: 0 1px 5px #000; }
 .arcade-card-info { padding: 16px 10px 9px; }
 .game-meta { display: flex; flex-wrap: wrap; gap: 7px; }
 .game-meta span { padding: 5px 7px; border: 1px solid rgba(179,174,255,.2); border-radius: 3px; color: #aaa5c5; font: 8px var(--mono); letter-spacing: .06em; }
@@ -156,5 +125,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .next-pixel, .loading-dots { animation: none; }
-  .arcade-card, .play-game-button, .games-scroll span { transition: none; }
+  .arcade-card, .play-game-button, .games-scroll span, .cover-art-image { transition: none; }
 }
