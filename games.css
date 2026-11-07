@@ -40,10 +40,10 @@
 .library-heading h2 { margin: 17px 0 0; color: #efedfa; font: 400 clamp(34px, 4.5vw, 52px)/1.1 var(--serif); letter-spacing: -.045em; }
 .library-count { display: flex; align-items: center; gap: 9px; margin: 0 0 6px; color: #88869f; font: 9px var(--mono); letter-spacing: .08em; }
 .library-count span { color: var(--accent); }
-.games-grid { display: grid; max-width: 1060px; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; margin: 0 auto; }
-.arcade-card { min-width: 0; overflow: hidden; border: 1px solid var(--arcade-line); background: rgba(16, 17, 30, .92); transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
-.arcade-card:hover { border-color: rgba(215, 255, 0, .56); transform: translateY(-4px); box-shadow: 0 18px 56px #0005, 0 0 28px #8e73ff0d; }
-.arcade-card-art { position: relative; display: grid; min-height: 185px; aspect-ratio: 1.65; place-items: center; overflow: hidden; color: #fff; background: radial-gradient(ellipse at 50% 49%, #282252 0, #13142b 45%, #090a13 83%); }
+.games-grid { display: grid; max-width: 1060px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: stretch; margin: 0 auto; }
+.arcade-card { min-width: 0; overflow: hidden; padding: 8px; border: 1px solid rgba(179, 174, 255, .24); border-radius: 14px; background: linear-gradient(145deg, rgba(28, 27, 46, .96), rgba(12, 13, 23, .98) 62%); box-shadow: 0 12px 32px #0003, inset 0 1px #ffffff08; transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+.arcade-card:hover { border-color: rgba(215, 255, 0, .72); transform: translateY(-5px); box-shadow: 0 20px 56px #0007, 0 0 30px #8e73ff15; }
+.arcade-card-art { position: relative; display: grid; min-height: 225px; aspect-ratio: 1.8; place-items: center; overflow: hidden; border: 1px solid rgba(255,255,255,.1); border-radius: 8px; color: #fff; background: radial-gradient(ellipse at 50% 49%, #282252 0, #13142b 45%, #090a13 83%); }
 .card-scanlines { position: absolute; z-index: 1; inset: 0; pointer-events: none; opacity: .16; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,.7) 4px); }
 .molluska-card-art { background: radial-gradient(ellipse at 50% 54%, #273d49 0, #17242c 43%, #0b1118 84%); }
 .molluska-cell { position: absolute; width: 22px; height: 22px; border: 3px solid #8ce2b3; background: #356c70; box-shadow: 0 0 20px #72d9a85c; image-rendering: pixelated; }
@@ -58,21 +58,30 @@
 .treta-river { position: absolute; right: -5%; bottom: 10%; left: -5%; height: 26%; border-top: 2px solid #d3cb91; background: linear-gradient(180deg, #7ec6bd, #2c8190 58%, #1d5266); clip-path: polygon(0 28%, 100% 0, 100% 100%, 0 100%); }
 .treta-altar { position: absolute; z-index: 1; bottom: 24%; left: 50%; width: 34px; height: 15px; background: #9c6632; transform: translateX(-50%); box-shadow: 0 5px #5c3c25, 0 9px 0 -3px #d0a453; }
 .treta-flame { position: absolute; z-index: 2; bottom: 38%; left: 50%; width: 13px; height: 26px; background: linear-gradient(0deg, #f0481f, #ffae39 58%, #fff0a0); clip-path: polygon(50% 0, 83% 45%, 73% 100%, 25% 100%, 13% 48%); filter: drop-shadow(0 0 12px #ff8c35); transform: translateX(-50%); }
+.antimatter-card-art { background-color: #11101e; background-image: radial-gradient(circle at 50% 48%, #482b55 0, #21172e 39%, #0c0d19 82%); }
+.antimatter-moon { position: absolute; top: 22%; right: 25%; width: 48px; aspect-ratio: 1; border-radius: 50%; background: #e2c5bd; box-shadow: 0 0 34px #d6a4e355, inset -9px -5px 0 #9c7c97; }
+.antimatter-manor { position: absolute; bottom: 20%; left: 50%; width: 44%; height: 48%; transform: translateX(-50%); background: linear-gradient(90deg, #100e1a, #282036 48%, #100e1a); clip-path: polygon(0 28%, 13% 28%, 13% 13%, 30% 13%, 30% 28%, 37% 28%, 50% 0, 63% 28%, 70% 28%, 70% 13%, 87% 13%, 87% 28%, 100% 28%, 100% 100%, 0 100%); filter: drop-shadow(0 0 12px #cc8ee933); }
+.antimatter-manor i { position: absolute; top: 40%; width: 8%; height: 14%; background: #e4a866; box-shadow: 0 0 12px #f3b865aa; }
+.antimatter-manor i:nth-child(1) { left: 20%; }.antimatter-manor i:nth-child(2) { left: 38%; }.antimatter-manor i:nth-child(3) { right: 38%; }.antimatter-manor i:nth-child(4) { right: 20%; }
+.antimatter-manor b { position: absolute; bottom: 0; left: 44%; width: 14%; height: 25%; background: #090912; border: 1px solid #c78fcf; border-bottom: 0; }
+.antimatter-ghost { position: absolute; z-index: 1; top: 34%; left: 30%; width: 34px; height: 45px; border-radius: 48% 48% 12% 12%; background: linear-gradient(180deg, #e8d5ff, #a580d2 72%, #60477f); box-shadow: 0 0 24px #d7aaff99; }
+.antimatter-ghost::before { position: absolute; right: 8px; bottom: 16px; left: 8px; height: 5px; background: #261b39; content: ""; box-shadow: 9px 0 #261b39; }
+.antimatter-ghost::after { position: absolute; right: -4px; bottom: -3px; left: -4px; height: 10px; background: #a580d2; clip-path: polygon(0 0, 24% 40%, 48% 0, 74% 40%, 100% 0, 100% 100%, 0 100%); content: ""; }
 .card-index, .card-status, .card-art-caption { position: absolute; z-index: 2; color: #d3cee8; font: 8px var(--mono); letter-spacing: .13em; }
-.card-index { top: 18px; left: 19px; }.card-status { top: 18px; right: 19px; color: var(--accent); }
+.card-index { top: 14px; left: 15px; padding: 7px 9px; border: 1px solid #ffffff24; border-radius: 4px; background: #090a13a8; }.card-status { top: 14px; right: 15px; padding: 7px 9px; border: 1px solid #d7ff0055; border-radius: 4px; color: var(--accent); background: #090a13a8; }
 .card-status i { display: inline-block; width: 6px; height: 6px; margin: 0 5px 1px 0; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-.card-art-title { position: relative; z-index: 2; margin-top: -6px; color: #fff5cb; font: clamp(13px, 1.5vw, 18px)/1.65 "Press Start 2P", var(--mono); letter-spacing: .035em; text-align: center; text-shadow: 3px 3px #8d3e91, 0 0 24px #d7ff0070; }
-.card-art-caption { right: 20px; bottom: 17px; color: #a29dbb; font-size: 7px; }
-.arcade-card-info { padding: 16px 16px 15px; }
+.card-art-title { position: relative; z-index: 2; margin-top: -6px; color: #fff5cb; font: clamp(16px, 2vw, 24px)/1.65 "Press Start 2P", var(--mono); letter-spacing: .035em; text-align: center; text-shadow: 3px 3px #8d3e91, 0 0 24px #d7ff0070; }
+.card-art-caption { right: 15px; bottom: 14px; padding: 6px 8px; border: 1px solid #ffffff20; border-radius: 4px; color: #c1bbd6; background: #090a13a8; font-size: 7px; }
+.arcade-card-info { padding: 16px 10px 9px; }
 .game-meta { display: flex; flex-wrap: wrap; gap: 7px; }
-.game-meta span { padding: 5px 6px; border: 1px solid rgba(179,174,255,.2); color: #aaa5c5; font: 7px var(--mono); letter-spacing: .06em; }
+.game-meta span { padding: 5px 7px; border: 1px solid rgba(179,174,255,.2); border-radius: 3px; color: #aaa5c5; font: 8px var(--mono); letter-spacing: .06em; }
 .game-card-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-top: 12px; }
 .game-card-title-row h3 { margin: 0; color: #f0edff; font: 400 26px/1.1 var(--serif); letter-spacing: -.04em; }
 .game-number { color: #66637d; font: 9px var(--mono); }
-.arcade-card-info > p { min-height: 82px; margin: 9px 0 13px; color: #a3a1b7; font-size: 11px; line-height: 1.65; }
-.game-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 12px; border-top: 1px solid var(--arcade-line); }
-.controls-hint { color: #76738d; font: 7px/1.7 var(--mono); letter-spacing: .02em; }
-.play-game-button { display: inline-flex; min-height: 35px; align-items: center; justify-content: center; gap: 8px; padding: 0 9px; border: 1px solid var(--accent); color: #11120b; background: var(--accent); font: 8px var(--mono); letter-spacing: .02em; text-transform: uppercase; transition: background .2s ease, color .2s ease; white-space: nowrap; }
+.arcade-card-info > p { min-height: 68px; margin: 10px 0 14px; color: #b6b3c8; font-size: 12px; line-height: 1.7; }
+.game-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 13px; border-top: 1px solid var(--arcade-line); }
+.controls-hint { color: #8d89a5; font: 8px/1.7 var(--mono); letter-spacing: .02em; }
+.play-game-button { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 8px; padding: 0 15px; border: 1px solid var(--accent); border-radius: 4px; color: #11120b; background: var(--accent); font: 9px var(--mono); letter-spacing: .04em; text-transform: uppercase; transition: background .2s ease, color .2s ease, box-shadow .2s ease; white-space: nowrap; }
 .play-game-button:hover { color: var(--accent); background: transparent; }
 .play-game-button span { font-size: 13px; }
 .next-game-card { display: flex; min-width: 0; flex-direction: column; border: 1px dashed rgba(179,174,255,.23); background: rgba(16,17,30,.4); }
@@ -125,6 +134,7 @@
   .game-card-footer { align-items: center; flex-direction: row; }
   .controls-hint { max-width: 48%; }
   .play-game-button { padding-inline: 10px; font-size: 8px; }
+  .controls-hint { font-size: 8px; }
   .next-game-screen { min-height: 175px; }
   .next-game-copy { padding: 18px; }
   .games-outro { margin-top: 32px; font-size: 8px; }
