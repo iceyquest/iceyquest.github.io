@@ -234,27 +234,6 @@ h1, h2, h3, p { margin-top: 0; }
   width: 100%; padding: 0; border: 0; color: inherit; text-align: left; cursor: pointer;
   background: #191916;
 }
-.game-project-visual {
-  position: relative; height: clamp(260px, 34vw, 500px); display: block; overflow: hidden;
-  isolation: isolate; background: #070811; color: #f1eee8;
-  background-image: linear-gradient(rgba(139,145,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(139,145,255,.07) 1px, transparent 1px), radial-gradient(ellipse at 50% 45%, #222057 0, #101126 38%, #070811 78%);
-  background-size: 32px 32px, 32px 32px, auto;
-  transition: filter .35s ease;
-}
-.game-project-visual:hover { filter: brightness(1.16); }
-.game-project-visual:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.game-project-visual::after { position: absolute; z-index: 0; inset: 45% 0 0; content: ""; background: linear-gradient(transparent, rgba(4,5,12,.92)); pointer-events: none; }
-.game-project-stars { position: absolute; inset: 0; opacity: .8; background-image: radial-gradient(#fff 1px, transparent 1.5px), radial-gradient(#9d9aff 1px, transparent 1.5px), radial-gradient(#f1d778 1px, transparent 1.5px); background-size: 67px 71px, 103px 89px, 139px 127px; background-position: 8px 7px, 35px 22px, 68px 49px; }
-.game-project-orbit { position: absolute; top: 45%; left: 50%; width: min(53%, 260px); aspect-ratio: 1; border: 1px solid rgba(152,145,255,.42); border-radius: 50%; transform: translate(-50%,-50%) rotate(-24deg) scaleY(.42); }
-.game-orbit-two { width: min(71%, 350px); border-color: rgba(215,255,0,.24); transform: translate(-50%,-50%) rotate(28deg) scaleY(.37); }
-.game-project-planet { position: absolute; top: 45%; left: 50%; width: clamp(86px, 12vw, 150px); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff8ac 0 5%, #ffd950 17%, #fc852f 43%, #a53d58 67%, #3b245f 81%, #111126 83%); box-shadow: 0 0 26px #ff9a4f80, 0 0 75px #8f4ad050; transform: translate(-50%,-50%); image-rendering: pixelated; }
-.game-project-planet i { width: 100%; height: 7px; background: #253672; opacity: .65; box-shadow: 0 -18px #ffcc5760, 0 15px #8b376070; }
-.game-project-player { position: absolute; top: calc(45% - clamp(40px, 6vw, 70px)); left: calc(50% + clamp(43px, 7vw, 79px)); width: 13px; height: 13px; background: var(--accent); box-shadow: 0 0 0 4px #d7ff002c, 0 0 22px #d7ff00; }
-.game-project-result { position: absolute; z-index: 1; top: 18px; left: 18px; padding: 10px 12px; background: rgba(11,11,10,.78); color: var(--accent); font: 10px var(--mono); letter-spacing: .06em; }
-.game-project-title { position: absolute; z-index: 1; top: 23%; left: 0; width: 100%; color: #f3edc5; font: clamp(13px, 2vw, 24px)/1.8 "Press Start 2P", var(--mono); letter-spacing: .04em; text-align: center; text-shadow: 3px 3px #8d3e91, 0 0 24px #d7ff0055; }
-.game-project-title > span { display: block; margin-top: 9px; color: var(--accent); font: 8px var(--mono); letter-spacing: .18em; }
-.game-project-visual .visual-caption { z-index: 1; font-size: clamp(14px, 1.65vw, 21px); }
-.game-project-visual .visual-caption b { color: var(--accent); }
 .project-visual::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, rgba(0,0,0,.1), transparent 36%, rgba(0,0,0,.35)); pointer-events: none; }
 .project-visual img { width: 100%; height: 100%; object-fit: cover; opacity: .74; transition: transform .65s cubic-bezier(.2,.7,.2,1), opacity .4s ease; }
 .project-visual:hover img { transform: scale(1.045); opacity: .94; }
@@ -346,6 +325,29 @@ blockquote cite { color: var(--muted); font: 10px var(--mono); letter-spacing: .
 .skills { margin-top: 36px; }
 .skills > p, .socials > p { margin-bottom: 18px; color: #b9b7b0; font: 11px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
 .skills .tag-list { gap: 8px; }
+.about-game-card {
+  display: grid; grid-template-columns: 118px minmax(0, 1fr); min-height: 126px; margin-top: 34px;
+  overflow: hidden; border: 1px solid rgba(215,255,0,.3); background: linear-gradient(115deg, rgba(215,255,0,.055), transparent 46%), #111110;
+  transition: border-color .2s ease, transform .2s ease, background-color .2s ease;
+}
+.about-game-card:hover { border-color: var(--accent); transform: translateY(-2px); background-color: #151513; }
+.about-game-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.about-game-art {
+  position: relative; min-height: 126px; overflow: hidden; background-color: #090a17;
+  background-image: linear-gradient(rgba(139,145,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(139,145,255,.08) 1px, transparent 1px), radial-gradient(ellipse at 50% 52%, #28224e, #090a17 72%);
+  background-size: 16px 16px, 16px 16px, auto;
+}
+.about-game-stars { position: absolute; inset: 0; opacity: .8; background-image: radial-gradient(#fff 1px, transparent 1.5px), radial-gradient(#d7ff00 1px, transparent 1.5px); background-size: 31px 37px, 47px 43px; background-position: 4px 9px, 17px 18px; }
+.about-game-orbit { position: absolute; top: 49%; left: 51%; width: 85px; height: 42px; border: 1px solid rgba(215,255,0,.5); border-radius: 50%; transform: translate(-50%,-50%) rotate(-23deg); }
+.about-game-planet { position: absolute; top: 49%; left: 51%; width: 35px; height: 35px; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #fff8ac 0 7%, #ffd950 20%, #fc852f 50%, #853857 76%, #17132d 82%); box-shadow: 0 0 20px #ff9a4f85; transform: translate(-50%,-50%); }
+.about-game-pixel { position: absolute; top: 19px; right: 15px; width: 6px; height: 6px; background: var(--accent); box-shadow: 0 0 0 3px #d7ff002d, 0 0 14px var(--accent); }
+.about-game-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; padding: 13px 15px; }
+.about-game-kicker { color: #aaa8a1; font: 8px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.about-game-copy > strong { color: #f1eee8; font: 400 24px/1.1 var(--serif); letter-spacing: -.03em; }
+.about-game-copy > span:nth-child(3) { color: var(--muted); font-size: 10px; line-height: 1.5; }
+.about-game-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 2px; color: var(--accent); font: 9px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.about-game-link b { font: 13px var(--sans); transition: transform .2s ease; }
+.about-game-card:hover .about-game-link b { transform: translate(2px,-2px); }
 
 .section-contact { padding-block: 120px 100px; }
 .contact-grid { margin-top: 70px; display: grid; grid-template-columns: 1fr .58fr; gap: 14%; }
