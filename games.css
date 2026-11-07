@@ -67,6 +67,18 @@
 .antimatter-ghost { position: absolute; z-index: 1; top: 34%; left: 30%; width: 34px; height: 45px; border-radius: 48% 48% 12% 12%; background: linear-gradient(180deg, #e8d5ff, #a580d2 72%, #60477f); box-shadow: 0 0 24px #d7aaff99; }
 .antimatter-ghost::before { position: absolute; right: 8px; bottom: 16px; left: 8px; height: 5px; background: #261b39; content: ""; box-shadow: 9px 0 #261b39; }
 .antimatter-ghost::after { position: absolute; right: -4px; bottom: -3px; left: -4px; height: 10px; background: #a580d2; clip-path: polygon(0 0, 24% 40%, 48% 0, 74% 40%, 100% 0, 100% 100%, 0 100%); content: ""; }
+.dinoaea-card-art { background-color: #0c1718; background-image: radial-gradient(ellipse at 50% 80%, #2f5c3a 0, #172f2c 46%, #0c141b 82%); }
+.dinoaea-moon { position: absolute; top: 17%; right: 24%; width: 43px; aspect-ratio: 1; border-radius: 50%; background: #d3cb91; box-shadow: 0 0 25px #e4d59b55; }
+.dinoaea-vine { position: absolute; bottom: 15%; width: 36%; height: 62%; border: 3px solid #477f50; border-bottom: 0; border-radius: 55% 55% 0 0; opacity: .7; }
+.vine-one { left: 9%; transform: rotate(-24deg); }.vine-two { right: 8%; transform: rotate(21deg); }
+.dinoaea-leaf { position: absolute; z-index: 1; width: 82px; height: 35px; border: 2px solid #9acc60; border-radius: 100% 0 100% 0; background: linear-gradient(145deg, #93c85a, #286947 72%); box-shadow: inset 0 -7px #123e35; }
+.leaf-one { bottom: 28%; left: 19%; transform: rotate(15deg); }.leaf-two { right: 17%; bottom: 26%; transform: scaleX(-1) rotate(15deg); }
+.dinoaea-stem { position: absolute; bottom: 15%; left: 49%; width: 12px; height: 42%; border-radius: 50% 50% 0 0; background: linear-gradient(90deg, #245741, #9acc60 52%, #285c43); transform: rotate(-4deg); }
+.dinoaea-trap { position: absolute; z-index: 2; top: 28%; left: 50%; width: 86px; height: 64px; border: 3px solid #c7e77a; border-radius: 55% 45% 50% 50%; background: radial-gradient(ellipse at 50% 60%, #d65766, #a53249 50%, #286447 53%); box-shadow: 0 0 26px #e35b7266, inset 0 -8px #173d31; transform: translateX(-50%) rotate(-7deg); }
+.dinoaea-trap::before, .dinoaea-trap::after { position: absolute; top: -11px; width: 10px; height: 14px; background: #d7ed9b; clip-path: polygon(50% 100%, 0 0, 100% 0); content: ""; }
+.dinoaea-trap::before { left: 20%; }.dinoaea-trap::after { right: 20%; }
+.dinoaea-trap i { position: absolute; top: 22px; left: 23px; width: 8px; height: 8px; border-radius: 50%; background: #f9e5a5; box-shadow: 23px 0 #f9e5a5, 0 0 9px #fff3bd; }
+.dinoaea-trap b { position: absolute; bottom: 12px; left: 35px; width: 12px; height: 9px; border-radius: 50%; background: #241a24; }
 .card-index, .card-status, .card-art-caption { position: absolute; z-index: 2; color: #d3cee8; font: 8px var(--mono); letter-spacing: .13em; }
 .card-index { top: 14px; left: 15px; padding: 7px 9px; border: 1px solid #ffffff24; border-radius: 4px; background: #090a13a8; }.card-status { top: 14px; right: 15px; padding: 7px 9px; border: 1px solid #d7ff0055; border-radius: 4px; color: var(--accent); background: #090a13a8; }
 .card-status i { display: inline-block; width: 6px; height: 6px; margin: 0 5px 1px 0; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
