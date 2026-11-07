@@ -46,8 +46,7 @@
 .games-scroll span { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--arcade-line); border-radius: 50%; color: var(--accent); transition: transform .2s ease; }
 .games-scroll:hover span { transform: translateY(3px); }
 .hero-arcade-art { position: relative; width: min(100%, 440px); aspect-ratio: 1; justify-self: end; transform: translateX(4%); }
-.crab-image-glow { position: absolute; inset: 12%; background: radial-gradient(ellipse, rgba(53, 201, 111, .24), transparent 68%); filter: blur(22px); }
-.hero-crab-image { position: absolute; z-index: 1; inset: 1% 7%; width: 86%; height: 98%; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .38)); }
+.hero-crab-image { position: absolute; z-index: 1; inset: 8% 2%; width: 96%; height: 84%; object-fit: contain; image-rendering: pixelated; }
 .hero-coordinate, .hero-art-label { position: absolute; color: #a9a4d5; font: 9px var(--mono); letter-spacing: .12em; }
 .hero-coordinate { top: 8%; right: 5%; }.hero-art-label { bottom: 12%; left: 6%; color: var(--accent); line-height: 1.8; }
 .hero-side-note { position: absolute; top: 50%; right: 19px; color: #6d6a86; font: 8px var(--mono); letter-spacing: .2em; writing-mode: vertical-rl; }
