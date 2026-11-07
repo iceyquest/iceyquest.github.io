@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" shape-rendering="crispEdges" role="img" aria-labelledby="title description">
+  <title id="title">Pixel-art noir operative</title>
+  <desc id="description">An original dark-haired operative in a charcoal suit holding two silver pistols crossed over the chest.</desc>
+  <path fill="#10111e" d="M25 154v-20h7v-17h8V94h7V77h8V60h18v17h8v17h7v23h8v17h7v20z"/>
+  <path fill="#1e2030" d="M31 154v-21h8v-18h8V94h8V78h8v76z"/>
+  <path fill="#292b3d" d="M64 78h8v16h8v24h8v18h8v18H64z"/>
+  <path fill="#404257" d="M36 137h17v17H36zm39 0h17v17H75z"/>
+  <path fill="#d2d3d8" d="M55 59h18v28l-9 13-9-13z"/>
+  <path fill="#b9bbc4" d="M59 69h10v25l-5 7-5-7z"/>
+  <path fill="#24263a" d="M61 70h6v27l-3 5-3-5z"/>
+  <path fill="#c99d80" d="M50 35h7v8h14v-8h7v27h-7v8H57v-8h-7z"/>
+  <path fill="#d8ae90" d="M55 41h18v22H55z"/>
+  <path fill="#26212a" d="M48 33V20h7v-6h23v7h6v25h-7v-9h-7v-5H58v5h-7v9h-3z"/>
+  <path fill="#3a2f36" d="M55 22h23v8H55z"/>
+  <path fill="#11131b" d="M52 48h8v3h-8zm17 0h8v3h-8z"/>
+  <path fill="#f1c69f" d="M49 43h5v11h-5zm29 0h5v11h-5z"/>
+  <path fill="#c4c6cf" d="M30 72h15v18H30zm53 0h15v18H83z"/>
+  <path fill="#888b9c" d="M32 75h11v9H32zm53 0h11v9H85z"/>
+  <path fill="#242638" d="M34 87h13v13H34zm47 0h13v13H81z"/>
+  <path fill="#c49a7d" d="M39 87h9v12h-9zm41 0h9v12h-9z"/>
+  <path fill="#252735" d="M39 96h10v19H39zm40 0h10v19H79z"/>
+  <path fill="#717586" d="M40 107h10v5H40zm38 0h10v5H78z"/>
+  <path fill="#8f929d" d="M45 113h6v4h-6zm32 0h6v4h-6z"/>
+  <path fill="#d3d5dc" d="M39 100l13-21 7 4-13 22z"/>
+  <path fill="#f1f2f4" d="M41 99l13-21 3 2-13 22z"/>
+  <path fill="#858998" d="M37 99l7 4-4 7-7-4z"/>
+  <path fill="#d3d5dc" d="M89 100L76 79l-7 4 13 22z"/>
+  <path fill="#f1f2f4" d="M87 99L74 78l-3 2 13 22z"/>
+  <path fill="#858998" d="M91 99l-7 4 4 7 7-4z"/>
+  <path fill="#5b5e6a" d="M37 97l8-13 4 3-8 13z"/>
+  <path fill="#5b5e6a" d="M91 97l-8-13-4 3 8 13z"/>
+  <path fill="#f5f5f3" d="M45 90l5-8 10-16 5 3-10 16-5 8z"/>
+  <path fill="#aeb2bd" d="M50 82l5 3-4 6-5-3z"/>
+  <path fill="#707583" d="M44 88l7 4-7 10-7-4z"/>
+  <path fill="#d5d7dd" d="M83 90l-5-8-10-16-5 3 10 16 5 8z"/>
+  <path fill="#aeb2bd" d="M78 82l-5 3 4 6 5-3z"/>
+  <path fill="#707583" d="M84 88l-7 4 7 10 7-4z"/>
+  <path fill="#ffffff" d="M48 89h4v4h-4zm28 0h4v4h-4z"/>
+  <path fill="#565a68" d="M52 61h5v8h-5zm19 0h5v8h-5z"/>
+  <path fill="#a9acb8" d="M58 105h12v3H58zm-5 28h7v4h-7zm15 0h7v4h-7z"/>
+  <path fill="#0c0d13" d="M31 153h66v7H31z"/>
+</svg>
