@@ -15,7 +15,7 @@
 
 .games-page .site-header { background: rgba(9, 10, 19, .93); }
 .games-page .desktop-nav a[aria-current="page"],
-.games-page .mobile-nav a[aria-current="page"] { color: #14150b; background: var(--accent); }
+.games-page .mobile-nav a[aria-current="page"] { color: var(--accent); background: transparent; }
 .games-main { overflow: hidden; }
 .games-hero {
   position: relative; min-height: clamp(570px, 50vw, 780px); display: flex; align-items: center;

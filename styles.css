@@ -167,13 +167,12 @@ img { display: block; width: 100%; }
 .desktop-nav a:hover, .desktop-nav a:focus-visible,
 .desktop-nav a[aria-current="page"]:not(.nav-games) { color: var(--accent); }
 .desktop-nav a.nav-games {
-  padding: 9px 13px; border: 1px solid rgba(215,255,0,.68); border-radius: 3px;
-  color: var(--accent); font-weight: 700; letter-spacing: .15em;
-  box-shadow: inset 0 0 16px rgba(215,255,0,.08);
+  color: var(--accent); font-family: var(--serif); font-size: 1.15em;
+  font-style: italic; font-weight: 500; letter-spacing: .02em;
 }
 .desktop-nav a.nav-games:hover, .desktop-nav a.nav-games:focus-visible,
 .desktop-nav a.nav-games[aria-current="page"] {
-  color: #11120b; background: var(--accent); box-shadow: 0 0 20px rgba(215,255,0,.2);
+  color: var(--accent);
 }
 .availability {
   display: flex; align-items: center; gap: 10px; color: var(--accent);
@@ -361,7 +360,6 @@ blockquote cite { color: var(--muted); font: 10px var(--mono); letter-spacing: .
   .site-header { gap: 16px; padding-inline: 2vw; }
   .desktop-nav { gap: clamp(8px, 1.3vw, 14px); }
   .desktop-nav a, .availability { font-size: 9px; letter-spacing: .07em; }
-  .desktop-nav a.nav-games { padding: 7px 9px; }
   .availability { gap: 7px; }
 }
 @media (max-width: 900px) {
@@ -396,10 +394,9 @@ blockquote cite { color: var(--muted); font: 10px var(--mono); letter-spacing: .
   .mobile-nav nav { position: absolute; z-index: 5; top: 50px; right: -8px; width: min(260px, calc(100vw - 40px)); padding: 10px 20px; background: #151513; border: 1px solid var(--line); box-shadow: 0 15px 35px #0008; }
   .mobile-nav nav a { display: block; padding: 15px 0; border-bottom: 1px solid var(--line); color: #d8d5ce; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
   .mobile-nav nav a.nav-games {
-    margin: 7px -10px; padding: 14px 10px; border: 1px solid rgba(215,255,0,.68);
-    color: var(--accent); font-weight: 700; background: rgba(215,255,0,.07);
+    color: var(--accent); font-family: var(--serif); font-style: italic; font-weight: 600;
   }
-  .mobile-nav nav a.nav-games[aria-current="page"] { color: #11120b; background: var(--accent); }
+  .mobile-nav nav a.nav-games[aria-current="page"] { color: var(--accent); }
   .mobile-nav nav a[aria-current="page"]:not(.nav-games) { color: var(--accent); }
   .mobile-nav nav a:last-child { border-bottom: 0; }
   .hero { min-height: calc(100svh - 72px); padding-top: 90px; }
