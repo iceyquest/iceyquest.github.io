@@ -1,41 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 160" shape-rendering="crispEdges" role="img" aria-labelledby="title description">
-  <title id="title">Pixel-art noir operative</title>
-  <desc id="description">An original bald character in a black suit, white shirt, and red tie raising two silver pistols.</desc>
-  <path fill="#10111e" d="M25 158v-19h5v-23h7V91h7V77h8V66h29v11h8v14h7v25h7v23h5v19z"/>
-  <path fill="#202233" d="M30 158v-20h7v-24h7V92h7V78h10v80z"/>
-  <path fill="#2b2d40" d="M67 78h12v14h7v22h7v24h7v20H67z"/>
-  <path fill="#d9dbe1" d="M51 67h26l-4 16-9 12-10-12z"/>
-  <path fill="#f1f1ee" d="M56 70h16l-2 12-6 8-7-8z"/>
-  <path fill="#a92537" d="M61 79h6l4 14-7 12-7-12z"/>
-  <path fill="#db3443" d="M62 82h4l2 10-4 7-4-7z"/>
-  <path fill="#161821" d="M62 102h4l7 39h-18z"/>
-  <path fill="#bba08a" d="M53 51h22v18H53z"/>
-  <path fill="#c69d80" d="M53 12h22v4h7v7h4v19h-4v11h-5v7H53v-7h-5V42h-4V23h4v-7h5z"/>
-  <path fill="#dfb999" d="M54 26h21v28H54z"/>
-  <path fill="#c69d80" d="M49 38h5v13h-5zm27 0h5v13h-5z"/>
-  <path fill="#c3a187" d="M57 53h15v5H57z"/>
-  <path fill="#171821" d="M53 42h9v3h-9zm17 0h8v3h-8z"/>
-  <path fill="#4a3435" d="M61 44h3v3h-3zm5 0h3v3h-3z"/>
-  <path fill="#8f6259" d="M62 47h5v6h-5z"/>
-  <path fill="#352a30" d="M59 56h12v3H59z"/>
-  <path fill="#cba78c" d="M48 38h4v11h-4zm29 0h4v11h-4z"/>
-  <path fill="#11131b" d="M36 87h12v15H36zm44 0h12v15H80z"/>
-  <path fill="#c69d80" d="M37 85h10v12H37zm44 0h10v12H81z"/>
-  <path fill="#252735" d="M39 96h10l4 18H42zm40 0h10l-3 18h-11z"/>
-  <path fill="#626675" d="M39 105l9 1-3 6-8-1zm41 1 9-1 2 6-8 1z"/>
-  <path fill="#d5aa89" d="M30 48h10v10h-7zm58 0h10v10h-3z"/>
-  <path fill="#252735" d="M38 72h11l-9-18 8-5 15 25-8 12H43z"/>
-  <path fill="#303243" d="M90 72H79l9-18-8-5-15 25 8 12h12z"/>
-  <path fill="#8b8e9a" d="M39 76h15v6H39zm35 0h15v6H74z"/>
-  <path fill="#f0f1f2" d="M19 48 5 18l7-7 8 2 15 28-8 5z"/>
-  <path fill="#c9ccd3" d="m22 44-12-26 4-4 14 27z"/>
-  <path fill="#717684" d="m5 18 7-7 4 7-7 7zm20 29 8-5 7 11-8 5z"/>
-  <path fill="#f0f1f2" d="m109 48 14-30-7-7-8 2-15 28 8 5z"/>
-  <path fill="#c9ccd3" d="m106 44 12-26-4-4-14 27z"/>
-  <path fill="#717684" d="m123 18-7-7-4 7 7 7zm-20 29-8-5-7 11 8 5z"/>
-  <path fill="#a7abb5" d="M8 13h5v4H8zm105 0h5v4h-5z"/>
-  <path fill="#161821" d="M27 45h7v14h-7zm67 0h7v14h-7z"/>
-  <path fill="#404351" d="M33 140h14v5H33zm48 0h14v5H81z"/>
-  <path fill="#777b88" d="M49 119h7v4h-7zm23 0h7v4h-7z"/>
-  <path fill="#0c0d13" d="M25 157h78v3H25z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 400" role="img" aria-labelledby="title description">
+  <title id="title">Retro noir operative portrait</title>
+  <desc id="description">An original bald, angry character in a black suit, white shirt, and red tie, raising two silver pistols.</desc>
+  <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0c9a7"/>
+      <stop offset=".48" stop-color="#c99473"/>
+      <stop offset="1" stop-color="#80564d"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f8f6"/>
+      <stop offset=".36" stop-color="#aeb6c1"/>
+      <stop offset=".58" stop-color="#eef0f1"/>
+      <stop offset="1" stop-color="#626b7a"/>
+    </linearGradient>
+    <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#353744"/>
+      <stop offset=".45" stop-color="#1b1d29"/>
+      <stop offset="1" stop-color="#0b0d16"/>
+    </linearGradient>
+    <linearGradient id="tie" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f0444a"/>
+      <stop offset="1" stop-color="#851c2c"/>
+    </linearGradient>
+    <filter id="shadow" x="-.3" y="-.2" width="1.6" height="1.6">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+  </defs>
+
+  <ellipse cx="180" cy="370" rx="122" ry="17" fill="#03040a" opacity=".55" filter="url(#shadow)"/>
+
+  <!-- Raised arms and hands -->
+  <path d="M118 248 74 221 47 166l24-14 40 56 34 20zm124 0 44-27 27-55-24-14-40 56-34 20z" fill="url(#suit)" stroke="#555866" stroke-width="3"/>
+  <path d="m51 166-17 8-7-15 12-10 20-8 13 13-7 12zM309 166l17 8 7-15-12-10-20-8-13 13 7 12z" fill="url(#skin)" stroke="#684b47" stroke-width="2"/>
+  <path d="m44 152-10-7 1-15 8-2 2-23 8-4 7 7-4 22 7 12-9 12zM316 152l10-7-1-15-8-2-2-23-8-4-7 7 4 22-7 12 9 12z" fill="url(#metal)" stroke="#525b68" stroke-width="3"/>
+  <path d="m38 130 23 5m-18-28 15 3m238 20-23 5m18-28-15 3" fill="none" stroke="#f8f8f4" stroke-width="3" opacity=".9"/>
+  <path d="m48 154 12 4-5 14-13-5zm264 0-12 4 5 14 13-5z" fill="#343744" stroke="#11131b" stroke-width="2"/>
+  <path d="m59 174 8 5m234-5-8 5" stroke="#252832" stroke-width="3"/>
+
+  <!-- Suit shoulders, lapels, and shirt -->
+  <path d="M111 221q18-17 48-23h42q30 6 48 23l44 46 25 133H42l25-133z" fill="url(#suit)" stroke="#555866" stroke-width="3"/>
+  <path d="m142 203 38 25 38-25 16 24-36 64h-36l-36-64z" fill="#e4e0d9"/>
+  <path d="m142 203 38 31-23 27-35-42zm76 0-38 31 23 27 35-42z" fill="#f3eee5" stroke="#b8b2ac" stroke-width="2"/>
+  <path d="m169 222 11 8 11-8 9 20-20 21-20-21z" fill="#6d1826"/>
+  <path d="m173 240 14 0 13 59-20 24-20-24z" fill="url(#tie)" stroke="#761726" stroke-width="2"/>
+  <path d="m174 247 7 1 4 48-7 11-7-12z" fill="#ff7370" opacity=".43"/>
+  <path d="m95 250 35 12 25 47-31 13-48-36zm170 0-35 12-25 47 31 13 48-36z" fill="#242632" stroke="#555866" stroke-width="2"/>
+  <path d="m129 276 27 43-16 8-25-38zm102 0-27 43 16 8 25-38z" fill="#414451"/>
+  <path d="m147 347 23 0m20 0 23 0" stroke="#777b86" stroke-width="3" opacity=".65"/>
+
+  <!-- Neck and head -->
+  <path d="M151 191v32q29 23 58 0v-32z" fill="url(#skin)"/>
+  <path d="M126 107q0-67 54-75 54 8 54 75l-8 54q-7 38-46 51-39-13-46-51z" fill="url(#skin)" stroke="#76544c" stroke-width="2"/>
+  <path d="M130 103q2-63 50-67 48 4 50 67l-11-16-13-17-23-8-25 8-16 18z" fill="#9a6d60" opacity=".36"/>
+  <path d="M131 115q-7 10-1 26l9 9-2-24zm98 0q7 10 1 26l-9 9 2-24z" fill="#bd8971" stroke="#76544c" stroke-width="2"/>
+  <path d="m138 129 36-12-3 9-30 11zm48-12 36 12-3 8-30-11z" fill="#38272b"/>
+  <path d="M145 134q13-5 25 0-7 9-19 5zM190 134q12-5 25 0l-6 5q-12 4-19-5z" fill="#e7d4be"/>
+  <ellipse cx="158" cy="136" rx="3.6" ry="4.3" fill="#25252a"/>
+  <ellipse cx="201" cy="136" rx="3.6" ry="4.3" fill="#25252a"/>
+  <circle cx="159" cy="134.5" r="1.2" fill="#fff"/>
+  <circle cx="202" cy="134.5" r="1.2" fill="#fff"/>
+  <path d="m137 125 36-12-3 8-31 10zm48-12 36 12-2 6-31-10z" fill="#302226"/>
+  <path d="m157 117 14-4m18 0 14 4" stroke="#80544b" stroke-width="2" opacity=".8"/>
+  <path d="m179 137-8 28 8 5 10-5-7-28z" fill="#aa755f"/>
+  <path d="m170 166 10 3 10-4-5 8-7 3-7-3z" fill="#8e5e50"/>
+  <path d="M157 180q23-7 46 0l-5 10q-18 7-36 0z" fill="#352326"/>
+  <path d="M164 184q16-2 32 0" fill="none" stroke="#c98e79" stroke-width="2" opacity=".8"/>
+  <path d="m143 150 9 2m56 0 9-2m-65 19 8 3m40-3 8-3" stroke="#87584d" stroke-width="2" opacity=".7"/>
+  <path d="m174 107 12 0m-16 6 8-1m14 1 8 1" stroke="#9d705e" stroke-width="2" opacity=".6"/>
+  <path d="m130 153 11 25m89-25-11 25" stroke="#f2c5a1" stroke-width="3" opacity=".35"/>
+  <path d="M139 162q6 5 12 5m58 0q7 0 12-5" fill="none" stroke="#795047" stroke-width="2" opacity=".65"/>
+  <path d="M143 177q5 3 10 2m54 0q5 1 10-2" stroke="#76514a" stroke-width="2"/>
+
+  <!-- Pixel-influenced screenprint grain and edge accents -->
+  <path d="M47 336v41h22m244 0h-22" fill="none" stroke="#777987" stroke-width="3" opacity=".46"/>
+  <path d="m121 228 22 19m96-19-22 19" fill="none" stroke="#8b8d98" stroke-width="2" opacity=".65"/>
 </svg>
