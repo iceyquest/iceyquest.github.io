@@ -166,10 +166,7 @@ img { display: block; width: 100%; }
 }
 .desktop-nav a:hover, .desktop-nav a:focus-visible,
 .desktop-nav a[aria-current="page"]:not(.nav-games) { color: var(--accent); }
-.desktop-nav a.nav-games {
-  color: var(--accent); font-family: var(--serif); font-size: 1.15em;
-  font-style: italic; font-weight: 500; letter-spacing: .02em;
-}
+.desktop-nav a.nav-games { color: var(--accent); }
 .desktop-nav a.nav-games:hover, .desktop-nav a.nav-games:focus-visible,
 .desktop-nav a.nav-games[aria-current="page"] {
   color: var(--accent);
@@ -393,9 +390,7 @@ blockquote cite { color: var(--muted); font: 10px var(--mono); letter-spacing: .
   .mobile-nav[open] summary span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
   .mobile-nav nav { position: absolute; z-index: 5; top: 50px; right: -8px; width: min(260px, calc(100vw - 40px)); padding: 10px 20px; background: #151513; border: 1px solid var(--line); box-shadow: 0 15px 35px #0008; }
   .mobile-nav nav a { display: block; padding: 15px 0; border-bottom: 1px solid var(--line); color: #d8d5ce; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
-  .mobile-nav nav a.nav-games {
-    color: var(--accent); font-family: var(--serif); font-style: italic; font-weight: 600;
-  }
+  .mobile-nav nav a.nav-games { color: var(--accent); }
   .mobile-nav nav a.nav-games[aria-current="page"] { color: var(--accent); }
   .mobile-nav nav a[aria-current="page"]:not(.nav-games) { color: var(--accent); }
   .mobile-nav nav a:last-child { border-bottom: 0; }
