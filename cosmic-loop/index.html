@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cosmic Loop</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9e7f5;--fg:#1a1a33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0b1a;--fg:#e8e8ff}}
+:root[data-theme="dark"]{--bg:#0b0b1a;--fg:#e8e8ff}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--fg);font-family:'Press Start 2P',monospace,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+canvas{width:min(96vw,calc(80vh*16/9));image-rendering:pixelated;border:4px solid var(--fg);background:#05050f;touch-action:none}
+p{font-size:9px;margin:0;text-align:center;line-height:1.7}
+</style></head><body>
+<canvas id="c" width="320" height="180"></canvas>
+<p>MOVE: MOUSE, TOUCH, ARROWS OR WASD<br>EAT SMALLER THINGS. AVOID BIGGER ONES.</p>
+<script>
+const cv=document.getElementById('c'),g=cv.getContext('2d'),W=320,H=180;
+const ST=[
+{n:'PARTICLE',at:0,c:'#ffffff',c2:'#99ccff'},
+{n:'ASTEROID',at:25,c:'#b9a58f',c2:'#6a5440'},
+{n:'PLANET',at:90,c:'#44aa99',c2:'#2277cc'},
+{n:'STAR',at:220,c:'#ffee55',c2:'#ff8822'},
+{n:'BLACK HOLE',at:450,c:'#000000',c2:'#aa44ff'},
+{n:'GOD',at:800,c:'#ffffff',c2:'#ffdd66'}];
+const END=1200;
+let p,E,cycle=1,state='title',t=0,flash=0,bt=0,ptr=null,keys={},ps=0;
+const R=m=>1.5+Math.sqrt(m)*.8;
+const stage=m=>{let s=0;ST.forEach((q,i)=>{if(m>=q.at)s=i});return s};
+function reset(){p={x:0,y:0,vx:0,vy:0,m:1};E=[];ps=0}
+reset();
+let ac;
+function beep(f,d=.06){try{ac=ac||new AudioContext();const o=ac.createOscillator(),v=ac.createGain();o.type='square';o.frequency.value=f;v.gain.value=.03;o.connect(v);v.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+function spawn(){
+  const a=Math.random()*6.28,d=130+Math.random()*80,k=Math.random();
+  const m=Math.max(.3,p.m*(k<.7?.05+Math.random()*.6:.9+Math.random()*.9));
+  E.push({x:p.x+Math.cos(a)*d,y:p.y+Math.sin(a)*d,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,m});
+}
+function update(){
+  t++;
+  if(state==='bang'){bt++;if(bt>150){cycle++;reset();state='play';flash=1}return}
+  if(state!=='play')return;
+  let dx=0,dy=0;
+  if(keys.ArrowLeft||keys.a)dx--;if(keys.ArrowRight||keys.d)dx++;
+  if(keys.ArrowUp||keys.w)dy--;if(keys.ArrowDown||keys.s)dy++;
+  if(ptr){dx=ptr.x-W/2;dy=ptr.y-H/2}
+  const l=Math.hypot(dx,dy);
+  if(l>6||!ptr&&l>0){dx/=l;dy/=l}else{dx=dy=0}
+  const sp=1.7/(1+Math.sqrt(p.m)*.03);
+  p.vx+=(dx*sp-p.vx)*.08;p.vy+=(dy*sp-p.vy)*.08;
+  p.x+=p.vx;p.y+=p.vy;
+  while(E.length<45)spawn();
+  const r=R(p.m),s=stage(p.m);
+  for(let i=E.length-1;i>=0;i--){
+    const e=E[i];e.x+=e.vx;e.y+=e.vy;
+    const ex=p.x-e.x,ey=p.y-e.y,d=Math.hypot(ex,ey)||1,er=R(e.m);
+    if(d>260){E.splice(i,1);continue}
+    if(s>=3&&e.m<p.m*.8&&d<r*4){e.x+=ex/d*.6;e.y+=ey/d*.6}
+    if(d<r+er*.6){
+      if(e.m<p.m*.85){p.m+=e.m*.6;beep(180+Math.random()*120,.04);E.splice(i,1)}
+      else{p.m=Math.max(1,p.m-p.m*.004-.05);p.vx-=(e.x-p.x)/d*.5;p.vy-=(e.y-p.y)/d*.5;flash=.25}
+    }
+  }
+  const ns=stage(p.m);
+  if(ns!==ps){ps=ns;flash=.8;[262,330,392,523,659,784].slice(0,ns+1).forEach((f,i)=>setTimeout(()=>beep(f,.12),i*90))}
+  if(p.m>=END){state='bang';bt=0;beep(80,.8)}
+}
+function disc(x,y,r,c){
+  g.fillStyle=c;r=Math.round(r);
+  for(let j=-r;j<=r;j++){const w=Math.floor(Math.sqrt(r*r-j*j));g.fillRect(Math.round(x-w),Math.round(y+j),w*2+1,1)}
+}
+function body(x,y,m,foe){
+  const i=stage(m),q=ST[i],r=R(m);
+  if(foe)disc(x,y,r+1.5,'#ff3344');
+  if(i===3)disc(x,y,r+3,'#aa3311');
+  if(i===4){disc(x,y,r+3,q.c2);disc(x,y,r+1.5,'#220033');disc(x,y,r,q.c);return}
+  if(i===5){
+    for(let k=0;k<8;k++){const a=t*.02+k*.785,rr=r+5+Math.sin(t*.1+k)*2;
+      g.fillStyle=q.c2;g.fillRect(Math.round(x+Math.cos(a)*rr),Math.round(y+Math.sin(a)*rr),2,2)}
+    disc(x,y,r+2,q.c2);
+  }
+  disc(x,y,r,q.c2);disc(x-r*.15,y-r*.15,r*.8,q.c);
+  if(i===2){g.fillStyle=q.c2;g.fillRect(Math.round(x-r*.6),Math.round(y),Math.round(r*1.2),1)}
+}
+function txt(s,x,y,c='#fff',a='center',sz=8){g.fillStyle=c;g.textAlign=a;g.font=sz+'px "Press Start 2P",monospace';g.fillText(s,x,y)}
+function draw(){
+  g.fillStyle='#05050f';g.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){
+    const f=.15+(i%3)*.12,sx=(((i*97)%W-p.x*f)%W+W)%W,sy=(((i*53)%H-p.y*f)%H+H)%H;
+    g.fillStyle=i%4?'#556':'#aab';g.fillRect(Math.floor(sx),Math.floor(sy),1,1);
+  }
+  if(state==='title'){
+    body(W/2,H/2-6,40+Math.sin(t*.05)*10,false);
+    txt('COSMIC LOOP',W/2,34,'#ffee55',"center",14);
+    txt('BECOME EVERYTHING. BEGIN AGAIN.',W/2,H-34,'#99ccff');
+    if(t%60<35)txt('CLICK, TAP OR PRESS A KEY',W/2,H-16);
+    return;
+  }
+  const ox=W/2-p.x,oy=H/2-p.y;
+  E.forEach(e=>body(e.x+ox,e.y+oy,e.m,e.m>=p.m*.85));
+  if(state==='bang'){
+    const rr=bt*bt*.06;disc(W/2,H/2,rr,'#ffffff');
+    if(bt>40)txt('THE BIG BANG',W/2,H/2-6,'#220033',"center",12);
+    if(bt>70)txt('YOU ARE A PARTICLE AGAIN',W/2,H/2+14,'#220033');
+  }else body(W/2,H/2,p.m,false);
+  const s=stage(p.m),a=ST[s].at,b=s<5?ST[s+1].at:END;
+  txt(ST[s].n,6,12,'#fff','left');txt('CYCLE '+cycle,W-6,12,'#99ccff','right');
+  g.fillStyle='#334';g.fillRect(6,H-12,120,6);
+  g.fillStyle=s===5?'#ffdd66':'#44ddaa';g.fillRect(6,H-12,Math.floor(120*Math.min(1,(p.m-a)/(b-a))),6);
+  if(flash>0){g.fillStyle='rgba(255,255,255,'+flash*.5+')';g.fillRect(0,0,W,H);flash-=.04}
+}
+function loop(){update();draw();requestAnimationFrame(loop)}
+loop();
+function start(){if(state==='title'){state='play';beep(440,.1)}}
+const pos=e=>{const b=cv.getBoundingClientRect();return{x:(e.clientX-b.left)/b.width*W,y:(e.clientY-b.top)/b.height*H}};
+cv.addEventListener('pointerdown',e=>{start();ptr=pos(e)});
+cv.addEventListener('pointermove',e=>{ptr=pos(e)});
+cv.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse')ptr=null});
+cv.addEventListener('pointerleave',()=>{ptr=null});
+addEventListener('keydown',e=>{start();keys[e.key.length>1?e.key:e.key.toLowerCase()]=1;if(e.key.startsWith('Arrow'))e.preventDefault()});
+addEventListener('keyup',e=>{keys[e.key.length>1?e.key:e.key.toLowerCase()]=0});
+</script></body></html>
