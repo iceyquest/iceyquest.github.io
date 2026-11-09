@@ -28,6 +28,9 @@
 .arcade-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px #d7ff00a0; }
 .eyebrow-divider { color: #555570; }
 .games-hero h1 { margin: 36px 0 22px; color: #ff4058; font: 700 clamp(72px, 9vw, 124px)/.95 var(--sans); letter-spacing: -.075em; white-space: nowrap; }
+.games-title-word { display: inline-flex; align-items: baseline; }
+.games-title-initial { color: #ff4058; }
+.games-title-rest { color: #fff; font-size: .38em; letter-spacing: -.04em; }
 .games-intro { max-width: 415px; margin: 0; color: #a3a1b7; font-size: 15px; line-height: 1.85; }
 .games-scroll { display: inline-flex; align-items: center; gap: 12px; margin-top: 37px; color: #dedaf7; font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .games-scroll span { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--arcade-line); border-radius: 50%; color: var(--accent); transition: transform .2s ease; }
