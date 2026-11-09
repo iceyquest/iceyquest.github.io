@@ -41,7 +41,7 @@
 .arcade-eyebrow { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--arcade-violet); font: 10px var(--mono); letter-spacing: .16em; }
 .arcade-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px #d7ff00a0; }
 .eyebrow-divider { color: #555570; }
-.games-hero h1 { margin: 36px 0 22px; color: #ff4058; font: 400 clamp(20px, 3vw, 34px)/1.4 "Press Start 2P", var(--mono); letter-spacing: .04em; white-space: nowrap; }
+.games-hero h1 { margin: 36px 0 22px; color: #ff4058; font: 600 clamp(20px, 3vw, 34px)/1.4 "Neue Haas Grotesk", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Arial, sans-serif; letter-spacing: .04em; white-space: nowrap; }
 .games-intro { max-width: 415px; margin: 0; color: #a3a1b7; font-size: 15px; line-height: 1.85; }
 .games-scroll { display: inline-flex; align-items: center; gap: 12px; margin-top: 37px; color: #dedaf7; font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .games-scroll span { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--arcade-line); border-radius: 50%; color: var(--accent); transition: transform .2s ease; }
