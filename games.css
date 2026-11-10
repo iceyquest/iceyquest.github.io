@@ -16,9 +16,9 @@
 .games-page .site-header { background: rgba(9, 10, 19, .93); }
 .games-page .desktop-nav a[aria-current="page"],
 .games-page .mobile-nav a[aria-current="page"] { color: var(--accent); background: transparent; }
-.gs-arcade-page .wordmark,
-.gs-arcade-page .desktop-nav .nav-games[aria-current="page"],
-.gs-arcade-page .mobile-nav .nav-games[aria-current="page"] { color: #ff4058; }
+.games-page .wordmark,
+.games-page .wordmark:hover,
+.games-page .wordmark:focus-visible { color: #ff4058; font-weight: 700; }
 .gs-arcade-page .black-hole-art::before {
   background: radial-gradient(ellipse, transparent 0 20%, rgba(255,64,88,.14) 31%, rgba(255,40,65,.2) 43%, rgba(255,40,65,.12) 58%, transparent 74%);
 }
