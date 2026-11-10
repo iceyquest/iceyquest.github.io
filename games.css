@@ -41,7 +41,7 @@
 .arcade-eyebrow { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--arcade-violet); font: 10px var(--mono); letter-spacing: .16em; }
 .arcade-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px #d7ff00a0; }
 .eyebrow-divider { color: #555570; }
-.games-hero h1 { margin: 36px 0 22px; color: #ff4058; font: 600 clamp(20px, 3vw, 34px)/1.4 "Neue Haas Grotesk", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Arial, sans-serif; letter-spacing: .04em; white-space: nowrap; }
+.games-hero h1 { margin: 36px 0 22px; color: #ff4058; font: 700 clamp(32px, 5vw, 60px)/1.2 "Neue Haas Grotesk", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Arial, sans-serif; letter-spacing: .04em; white-space: nowrap; }
 .games-intro { max-width: 415px; margin: 0; color: #a3a1b7; font-size: 15px; line-height: 1.85; }
 .games-scroll { display: inline-flex; align-items: center; gap: 12px; margin-top: 37px; color: #dedaf7; font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .games-scroll span { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--arcade-line); border-radius: 50%; color: var(--accent); transition: transform .2s ease; }
@@ -132,7 +132,7 @@
   .games-hero { min-height: 0; display: flex; align-items: stretch; flex-direction: column; padding: 74px 24px 0; }
   .games-hero-copy { width: auto; padding: 0; }
   .arcade-eyebrow { font-size: 8px; letter-spacing: .1em; }
-  .games-hero h1 { margin: 29px 0 16px; font-size: clamp(18px, 5vw, 24px); }
+  .games-hero h1 { margin: 29px 0 16px; font-size: clamp(30px, 8vw, 42px); }
   .games-intro { max-width: 360px; font-size: 13px; }
   .games-scroll { margin-top: 24px; }
   .games-hero-artwork { position: relative; inset: auto; z-index: 0; display: block; width: calc(100% + 48px); height: auto; max-width: none; margin: 30px -24px 0; object-fit: contain; }
