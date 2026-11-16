@@ -67,7 +67,6 @@
 .card-index, .card-status, .card-art-caption { position: absolute; z-index: 2; color: #d3cee8; font: 8px var(--mono); letter-spacing: .13em; }
 .card-index { top: 14px; left: 15px; padding: 7px 9px; border: 1px solid #ffffff24; border-radius: 4px; background: #090a13a8; }.card-status { top: 14px; right: 15px; padding: 7px 9px; border: 1px solid #d7ff0055; border-radius: 4px; color: var(--accent); background: #090a13a8; }
 .card-status i { display: inline-block; width: 6px; height: 6px; margin: 0 5px 1px 0; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-.card-art-title { position: absolute; z-index: 2; right: 22px; bottom: 44px; left: 22px; margin: 0; color: #fff9e9; font: clamp(20px, 2.7vw, 34px)/1.25 "Press Start 2P", var(--mono); letter-spacing: .02em; text-align: left; text-shadow: 3px 4px #15111e, 0 0 26px #000b; }
 .card-art-caption { right: auto; bottom: 17px; left: 23px; padding: 0; border: 0; border-radius: 0; color: #e5dfd1; background: transparent; font-size: 8px; text-shadow: 0 1px 5px #000; }
 .arcade-card-info { padding: 16px 10px 9px; }
 .game-meta { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -144,7 +143,6 @@
   .library-count { margin: 0; font-size: 8px; }
   .games-grid { grid-template-columns: 1fr; gap: 16px; }
   .arcade-card-art { aspect-ratio: 3 / 4; }
-  .card-art-title { font-size: clamp(18px, 6vw, 26px); }
   .arcade-card-info { padding: 16px; }
   .arcade-card-info > p { min-height: 0; }
   .game-card-footer { align-items: center; flex-direction: row; }
